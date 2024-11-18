@@ -22,7 +22,7 @@ export const ProfileHeader: FC<Props> = ({
     return (
         <div
             className={cn(
-                "flex gap-10 items-end pr-6 pb-8 pl-8 pt-28 bg-gradient-to-t from-amber-950 to-orange-800",
+                "flex md:gap-10 items-end pr-6 pb-8 pl-8 pt-28 gap-6",
                 className
             )}
         >
@@ -40,7 +40,9 @@ export const ProfileHeader: FC<Props> = ({
                 <span className="text-white font-semibold text-xl">
                     Профиль
                 </span>
-                <h1 className="font-bold text-white text-9xl">{name}</h1>
+                <h1 className="font-bold text-white lg:text-9xl md:text-8xl text-4xl">
+                    {name}
+                </h1>
                 <div className="flex gap-1">
                     <span className="text-gray-200">
                         {openPlaylistCount} открытых плейлистов
