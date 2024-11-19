@@ -10,7 +10,7 @@ enum MusicCategories {
     Classical
 }
 
-interface Music {
+export interface Music {
     id: string;
     avatar: string;
     name: string;
