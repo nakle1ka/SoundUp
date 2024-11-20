@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { AuthorCard } from "./author-card";
-import { useWindowSize } from "@reactuses/core";
+import { useElementSize, useWindowSize } from "@reactuses/core";
 import { cn } from "@/lib/utils";
 
 const initialWidth = 1650;
@@ -37,10 +37,11 @@ export const AuthorCardRow: FC<Props> = ({
     description,
     typeCard,
 }) => {
-    const { width } = useWindowSize();
+    const ref = useRef<HTMLDivElement>(null);
+    const [width, height] = useElementSize(ref);
 
     return (
-        <div className={cn("px-4", className)}>
+        <div className={cn("px-4", className)} ref={ref}>
             <div>
                 <div className="flex justify-between items-end mb-3">
                     <div>
@@ -54,7 +55,7 @@ export const AuthorCardRow: FC<Props> = ({
                     </span>
                 </div>
             </div>
-            <div className="flex gap-4 justify-between ">
+            <div className="flex gap-4 justify-between overflow-hidden">
                 {albums
                     .slice(0, getCountAuthorCards(width))
                     .map(({ imageUrl, name, description }, index) => (
