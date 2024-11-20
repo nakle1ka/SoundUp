@@ -1,8 +1,6 @@
-"use client";
-
-import { cn } from "@/lib/utils";
 import { FC } from "react";
 import { AuthorCardRow } from "@/components/author/author-card-row";
+import { cn } from "@/lib/utils";
 
 interface Props {
     className?: string;
@@ -12,68 +10,72 @@ const users = [
     {
         imageUrl: "/assets/logo.jpg",
         name: "Lil Uzi Vert",
-        description: "Исполнитель",
+        description: "Профиль",
+        link: "#",
     },
     {
         imageUrl: "/assets/logo.jpg",
         name: "Travis Scott",
-        description: "Исполнитель",
+        description: "Профиль",
+        link: "#",
     },
     {
         imageUrl: "/assets/logo.jpg",
         name: "Kendrick Lamar",
-        description: "Исполнитель",
+        description: "Профиль",
+        link: "#",
     },
     {
         imageUrl: "/assets/logo.jpg",
         name: "J. Cole",
-        description: "Исполнитель",
+        description: "Профиль",
+        link: "#",
     },
     {
         imageUrl: "/assets/logo.jpg",
         name: "Drake",
-        description: "Исполнитель",
+        description: "Профиль",
+        link: "#",
     },
     {
         imageUrl: "/assets/logo.jpg",
         name: "The Weeknd",
-        description: "Исполнитель",
+        description: "Профиль",
+        link: "#",
     },
     {
         imageUrl: "/assets/logo.jpg",
         name: "A$AP Rocky",
-        description: "Исполнитель",
+        description: "Профиль",
+        link: "#",
     },
     {
         imageUrl: "/assets/logo.jpg",
         name: "Tyler, The Creator",
-        description: "Исполнитель",
+        description: "Профиль",
+        link: "#",
     },
     {
         imageUrl: "/assets/logo.jpg",
         name: "Post Malone",
-        description: "Исполнитель",
+        description: "Профиль",
+        link: "#",
     },
     {
         imageUrl: "/assets/logo.jpg",
         name: "Billie Eilish",
-        description: "Исполнитель",
+        description: "Профиль",
+        link: "#",
     },
 ];
 
-export const ProfileTopAuthors: FC<Props> = ({ className }) => {
+export const ProfileSubscribers: FC<Props> = ({ className }) => {
     return (
-        <div className={cn(" text-white bg-black/10", className)}>
-            <div className="pl-6">
-                <span className=" block py-8 lg:py-12 tracking-widest">
-                    •••
-                </span>
-            </div>
+        <div className={cn(className, "mt-12")}>
             <AuthorCardRow
-                name={"Топ исполнителей этого месяца"}
+                name="Уже подписаны"
+                typeCard="rounded"
                 albums={users}
-                description="Видны только тебе"
-                typeCard={"square"}
             />
         </div>
     );

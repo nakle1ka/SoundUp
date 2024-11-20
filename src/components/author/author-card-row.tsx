@@ -1,6 +1,8 @@
+"use client";
+
 import { FC, useRef } from "react";
 import { AuthorCard } from "./author-card";
-import { useElementSize, useWindowSize } from "@reactuses/core";
+import { useElementSize } from "@reactuses/core";
 import { cn } from "@/lib/utils";
 
 const initialWidth = 1650;
@@ -28,6 +30,7 @@ type Album = {
     imageUrl: string;
     name: string;
     description: string;
+    link: string;
 };
 
 export const AuthorCardRow: FC<Props> = ({
@@ -38,10 +41,10 @@ export const AuthorCardRow: FC<Props> = ({
     typeCard,
 }) => {
     const ref = useRef<HTMLDivElement>(null);
-    const [width, height] = useElementSize(ref);
+    const [width] = useElementSize(ref);
 
     return (
-        <div className={cn("px-4", className)} ref={ref}>
+        <div className={cn("px-4 text-white", className)} ref={ref}>
             <div>
                 <div className="flex justify-between items-end mb-3">
                     <div>
@@ -58,13 +61,14 @@ export const AuthorCardRow: FC<Props> = ({
             <div className="flex gap-4 justify-between overflow-hidden">
                 {albums
                     .slice(0, getCountAuthorCards(width))
-                    .map(({ imageUrl, name, description }, index) => (
+                    .map(({ imageUrl, name, description, link }, index) => (
                         <AuthorCard
                             imageUrl={imageUrl}
                             name={name}
                             description={description}
                             key={index}
                             typeCard={typeCard}
+                            link={link}
                         ></AuthorCard>
                     ))}
             </div>

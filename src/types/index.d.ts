@@ -7,7 +7,7 @@ enum MusicCategories {
     Country,
     Jazz,
     Indie,
-    Classical
+    Classical,
 }
 
 interface Music {

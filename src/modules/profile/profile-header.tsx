@@ -23,12 +23,12 @@ export const ProfileHeader: FC<Props> = ({
     className,
 }) => {
     const ref = useRef<HTMLDivElement>(null);
-    const [width, height] = useElementSize(ref);
+    const [width] = useElementSize(ref);
 
     return (
         <div
             className={cn(
-                "flex flex-col items-left sm:flex-row md:gap-10 sm:items-end px-4 lg:px-8 pb-8 pt-28 gap-6",
+                "flex flex-col items-left bg-black/5 sm:flex-row md:gap-10 sm:items-end px-4 lg:px-8 pb-8 pt-28 gap-6",
                 className
             )}
         >

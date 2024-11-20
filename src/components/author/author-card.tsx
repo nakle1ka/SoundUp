@@ -1,13 +1,15 @@
 import { FC } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface Props {
     imageUrl: string;
     name: string;
     description: string;
-    size?: number;
+    link: string;
     typeCard?: "rounded" | "square";
+    size?: number;
     className?: string;
 }
 
@@ -17,8 +19,9 @@ export const AuthorCard: FC<Props> = ({
     imageUrl,
     name,
     description,
-    size,
+    link,
     typeCard,
+    size,
     className,
 }) => {
     return (
@@ -28,17 +31,19 @@ export const AuthorCard: FC<Props> = ({
                 className
             )}
         >
-            <Image
-                className={
-                    typeCard == "rounded" ? "rounded-full" : "rounded-2xl"
-                }
-                src={imageUrl}
-                width={size ?? defaultSize}
-                height={size ?? defaultSize}
-                alt={"Avatar"}
-            />
-            <h3 className="text-white font-semibold">{name}</h3>
-            <p className="text-gray-400">{description}</p>
+            <Link href={link}>
+                <Image
+                    className={
+                        typeCard == "rounded" ? "rounded-full" : "rounded-2xl"
+                    }
+                    src={imageUrl}
+                    width={size ?? defaultSize}
+                    height={size ?? defaultSize}
+                    alt={"Avatar"}
+                />
+                <h3 className="text-white font-semibold">{name}</h3>
+                <p className="text-gray-400">{description}</p>
+            </Link>
         </div>
     );
 };
