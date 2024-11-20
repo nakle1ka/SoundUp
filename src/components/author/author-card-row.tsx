@@ -44,12 +44,14 @@ export const AuthorCardRow: FC<Props> = ({
             <div>
                 <div className="flex justify-between items-end mb-3">
                     <div>
-                        <h2 className="font-bold text-xl">{name}</h2>
-                        <span className="block text-gray-400">
+                        <h2 className="font-bold lg:text-xl text-lg">{name}</h2>
+                        <span className="block text-gray-400 text-sm lg:text-base">
                             {description}
                         </span>
                     </div>
-                    <span className="font-bold mr-4">Показать все</span>
+                    <span className="font-bold mr-4 text-sm lg:text-base">
+                        Показать все
+                    </span>
                 </div>
             </div>
             <div className="flex gap-4 justify-between ">

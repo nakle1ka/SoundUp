@@ -22,7 +22,12 @@ export const AuthorCard: FC<Props> = ({
     className,
 }) => {
     return (
-        <div className={cn("inline-flex flex-col gap-1", className)}>
+        <div
+            className={cn(
+                "inline-flex flex-col gap-1 justify-between",
+                className
+            )}
+        >
             <Image
                 className={
                     typeCard == "rounded" ? "rounded-full" : "rounded-2xl"

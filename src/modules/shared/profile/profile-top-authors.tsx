@@ -65,7 +65,9 @@ export const ProfileTopAuthors: FC<Props> = ({ className }) => {
     return (
         <div className={cn(" text-white bg-black/10", className)}>
             <div className="pl-6">
-                <span className=" block py-12 tracking-widest">•••</span>
+                <span className=" block py-8 lg:py-12 tracking-widest">
+                    •••
+                </span>
             </div>
             <AuthorCardRow
                 name={"Топ исполнителей этого месяца"}
