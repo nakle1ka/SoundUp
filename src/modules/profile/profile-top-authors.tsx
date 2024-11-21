@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { FC } from "react";
-import { AuthorCardRow } from "@/components/author/author-card-row";
+import { ContentCardRow } from "@/components/author/content-card-row";
 
 interface Props {
     className?: string;
@@ -73,15 +73,15 @@ const users = [
 
 export const ProfileTopAuthors: FC<Props> = ({ className }) => {
     return (
-        <div className={cn(" text-white bg-black/15", className)}>
+        <div className={cn("px-4 text-white bg-black/15", className)}>
             <div className="pl-6">
                 <span className=" block py-8 lg:py-12 tracking-widest">
                     •••
                 </span>
             </div>
-            <AuthorCardRow
+            <ContentCardRow
                 name="Топ исполнителей этого месяца"
-                albums={users}
+                content={users}
                 description="Видны только тебе"
                 typeCard={"square"}
             />

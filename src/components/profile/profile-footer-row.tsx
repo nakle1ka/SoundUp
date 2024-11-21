@@ -39,7 +39,12 @@ const links: FooterLink[] = [
 
 export const ProfileFooterRow: FC<Props> = ({ className }) => {
     return (
-        <div className={cn("flex justify-between mx-4 mt-12 pb-32", className)}>
+        <div
+            className={cn(
+                "flex justify-between mx-4 mt-12 pb-32 gap-1 flex-col lg:flex-row",
+                className
+            )}
+        >
             {links.map((link, index) => (
                 <ProfileFooterLink link={link} key={index} />
             ))}

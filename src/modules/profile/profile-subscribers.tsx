@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { AuthorCardRow } from "@/components/author/author-card-row";
+import { ContentCardRow } from "@/components/author/content-card-row";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -71,11 +71,11 @@ const users = [
 
 export const ProfileSubscribers: FC<Props> = ({ className }) => {
     return (
-        <div className={cn(className, "mt-12")}>
-            <AuthorCardRow
+        <div className={cn(className, "px-4 mt-12")}>
+            <ContentCardRow
                 name="Уже подписаны"
                 typeCard="rounded"
-                albums={users}
+                content={users}
             />
         </div>
     );

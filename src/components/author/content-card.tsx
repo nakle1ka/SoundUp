@@ -15,7 +15,7 @@ interface Props {
 
 const defaultSize = 150;
 
-export const AuthorCard: FC<Props> = ({
+export const ContentCard: FC<Props> = ({
     imageUrl,
     name,
     description,

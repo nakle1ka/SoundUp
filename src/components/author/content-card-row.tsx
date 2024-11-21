@@ -1,9 +1,9 @@
 "use client";
 
 import { FC, useRef } from "react";
-import { AuthorCard } from "./author-card";
 import { useElementSize } from "@reactuses/core";
 import { cn } from "@/lib/utils";
+import { ContentCard } from "./content-card";
 
 const initialWidth = 1650;
 
@@ -20,23 +20,23 @@ const getCountAuthorCards = (width: number) => {
 
 interface Props {
     name: string;
-    albums: Album[];
+    content: ContentCartType[];
     description?: string;
     typeCard?: "rounded" | "square";
     className?: string;
 }
 
-type Album = {
+export type ContentCartType = {
     imageUrl: string;
     name: string;
     description: string;
     link: string;
 };
 
-export const AuthorCardRow: FC<Props> = ({
+export const ContentCardRow: FC<Props> = ({
     className,
     name,
-    albums,
+    content,
     description,
     typeCard,
 }) => {
@@ -44,7 +44,7 @@ export const AuthorCardRow: FC<Props> = ({
     const [width] = useElementSize(ref);
 
     return (
-        <div className={cn("px-4 text-white", className)} ref={ref}>
+        <div className={cn(" text-white", className)} ref={ref}>
             <div>
                 <div className="flex justify-between items-end mb-3">
                     <div>
@@ -53,23 +53,29 @@ export const AuthorCardRow: FC<Props> = ({
                             {description}
                         </span>
                     </div>
-                    <span className="font-bold mr-4 text-sm lg:text-base">
-                        Показать все
+                    <span className="font-bold lg:text-base text-sm">
+                        Показать {width < 450 && <br />} все
                     </span>
                 </div>
             </div>
-            <div className="flex gap-4 justify-between overflow-hidden">
-                {albums
+            <div
+                className={cn(
+                    // getCountAuthorCards(width) <= content.length &&
+                    //     "justify-between",
+                    "flex gap-7 overflow-hidden 2xl:gap-10"
+                )}
+            >
+                {content
                     .slice(0, getCountAuthorCards(width))
                     .map(({ imageUrl, name, description, link }, index) => (
-                        <AuthorCard
+                        <ContentCard
                             imageUrl={imageUrl}
                             name={name}
                             description={description}
                             key={index}
                             typeCard={typeCard}
                             link={link}
-                        ></AuthorCard>
+                        ></ContentCard>
                     ))}
             </div>
         </div>

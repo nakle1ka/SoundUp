@@ -4,12 +4,12 @@ import { ProfileTopAuthors } from "@/modules/profile/profile-top-authors";
 import { ProfilePlaylists } from "@/modules/profile/profile-playlists";
 import { ProfileSubscribers } from "@/modules/profile/profile-subscribers";
 import { ProfileFooter } from "@/modules/profile/profile-footer";
-import { Container } from "@/components/container/container";
+import { ProfileTopBg } from "@/components/profile/profile-top-bg";
 
 export default function Profile() {
     return (
-        <Container>
-            <div className="before:content-[''] before:absolute before:w-screen before:h-3/4 before:bg-gradient-to-t before:from-transparent before:to-orange-800 before:-z-10">
+        <div className="w-3/4 h-[800px] overflow-auto relative">
+            <ProfileTopBg>
                 <ProfileHeader
                     image={Avatar}
                     name="CatMario"
@@ -20,7 +20,7 @@ export default function Profile() {
                 <ProfilePlaylists />
                 <ProfileSubscribers />
                 <ProfileFooter />
-            </div>
-        </Container>
+            </ProfileTopBg>
+        </div>
     );
 }
