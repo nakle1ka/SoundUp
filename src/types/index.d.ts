@@ -10,13 +10,14 @@ enum MusicCategories {
     Classical
 }
 
-export interface Music {
+    export interface Music {
     id: string;
     avatar: string;
     name: string;
+    authors: string[];
     musicAudioId: string;
 
-    category: MusicCategories;
+    category: string;
 
     createdAt: Date; // DateTime
     updatedAt: Date; // DateTime
