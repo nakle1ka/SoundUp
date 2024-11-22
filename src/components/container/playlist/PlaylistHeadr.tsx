@@ -17,11 +17,11 @@ const PlaylistsHeadr: React.FC<LayoutPlaylistsHeadr> = ({ children, imageSrc }) 
             <div className="inline-block">
                 <Link href='/'>
                     <Image
-                        src={imageSrc}
+                        src={'/'}
                         alt="icon"
                         width={150}
                         height={150}
-                        className="hover:scale-110"
+                        className="hover:scale-110 shadow-2xl duration-1000"
                     />
                 </Link>
             </div>

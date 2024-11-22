@@ -8,19 +8,28 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { Clock3 } from 'lucide-react';
+import PlaylistsHeadr from "@/components/container/playlist/PlaylistHeadr";
+import Link from "next/link";
 
     const songs = [
         {
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
+            id: '1' ,
+            avatar: '',
+            name: 'aaaaa',
+            authors: 'bbbb',
+            musicAudioId: '3:33',
+            albumName: 'sssss',
+            createdAt: new Date("2024-01-01T10:00:00Z"),
         },
         {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
+            id: '2' ,
+            avatar: '',
+            name: 'aaaaa',
+            authors: 'bbbb',
+            musicAudioId: '3:33',
+            albumName: 'sssss',
+            createdAt: new Date("2024-01-01T10:00:00Z"),
         },
     ]
 
@@ -29,26 +38,34 @@ import {
 
     
         return (
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead className="w-[100px]">Invoice</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {songs.map((song) => (
-                    <TableRow key={song.invoice}>
-                        <TableCell className="font-medium">{song.invoice}</TableCell>
-                        <TableCell>{song.paymentStatus}</TableCell>
-                        <TableCell>{song.paymentMethod}</TableCell>
-                        <TableCell className="text-right">{song.totalAmount}</TableCell>
+            <div>
+                <PlaylistsHeadr imageSrc="">asdasd</PlaylistsHeadr>
+                <Table>
+                <TableHeader className="rounded-md">
+                    <TableRow className="rounded-[20px]">
+                        <TableHead className="w-[100px] ">#</TableHead>
+                        <TableHead>Title</TableHead>
+                        <TableHead>Album</TableHead>
+                        <TableHead>Date of addition</TableHead>
+                        <TableHead className="flex justify-end items-center "><Clock3/></TableHead>
                     </TableRow>
-                ))}
-            </TableBody>
-        </Table>
+                </TableHeader>
+                <TableBody>
+                    {songs.map((song) => (
+                        <TableRow key={song.id} className="rounded-md">
+                            <TableCell className="font-medium">{song.id}</TableCell>
+                            <TableCell>
+                                <Link href= '/' className="hover:underline">{song.name}</Link>
+                                <Link href = '/' className="hover:underline">{song.authors}</Link>
+                            </TableCell>
+                            <TableCell><Link href = '/' className="hover:underline">{song.albumName}</Link></TableCell>
+                            <TableCell>{song.createdAt.toLocaleDateString()}</TableCell>
+                            <TableCell className="text-right">{song.musicAudioId}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+            </div>
         )
     };
     

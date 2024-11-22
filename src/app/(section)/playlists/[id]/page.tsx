@@ -34,7 +34,7 @@ const PlaylistsPage = () => {
     return(
         <div className="">
             <div>
-                <PlaylistsHeadr imageSrc="https://avatars.yandex.net/get-music-content/33216/66f656c7.a.2043390-1/m1000x1000?webp=false">sddsds</PlaylistsHeadr>
+                <PlaylistsHeadr imageSrc="">sddsds</PlaylistsHeadr>
             </div>
             <div>
                 <Table>
