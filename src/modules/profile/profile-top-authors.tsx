@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { FC } from "react";
 import { ContentCardRow } from "@/components/author/content-card-row";
@@ -80,6 +78,7 @@ export const ProfileTopAuthors: FC<Props> = ({ className }) => {
                 </span>
             </div>
             <ContentCardRow
+                className="z-10"
                 name="Топ исполнителей этого месяца"
                 content={users}
                 description="Видны только тебе"

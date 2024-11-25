@@ -52,7 +52,7 @@ export const ProfileHeader: FC<Props> = ({
                 <div
                     className={cn(
                         width <= 300 ? "flex-col" : "items-center",
-                        "flex gap-1 flex-wrap"
+                        "flex gap-1 flex-wrap "
                     )}
                     ref={ref}
                 >

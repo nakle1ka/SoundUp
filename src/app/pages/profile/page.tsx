@@ -8,19 +8,18 @@ import { ProfileTopBg } from "@/components/profile/profile-top-bg";
 
 export default function Profile() {
     return (
-        <div className="w-3/4 h-[800px] overflow-auto relative">
-            <ProfileTopBg>
-                <ProfileHeader
-                    image={Avatar}
-                    name="CatMario"
-                    subsribeCount={5}
-                    openPlaylistCount={5}
-                />
-                <ProfileTopAuthors />
-                <ProfilePlaylists />
-                <ProfileSubscribers />
-                <ProfileFooter />
-            </ProfileTopBg>
-        </div>
+        <>
+            <ProfileTopBg />
+            <ProfileHeader
+                image={Avatar}
+                name="CatMario"
+                subsribeCount={5}
+                openPlaylistCount={5}
+            />
+            <ProfileTopAuthors className="z-30" />
+            <ProfilePlaylists />
+            <ProfileSubscribers />
+            <ProfileFooter />
+        </>
     );
 }
