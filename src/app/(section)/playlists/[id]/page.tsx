@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table"
 import { Clock3 } from 'lucide-react';
 import PlaylistsHeadr from "@/components/container/playlist/PlaylistHeadr";
-
+import Player from "@/components/container/playlist/Player";
 
 
 const songs = [
@@ -35,6 +35,7 @@ const PlaylistsPage = () => {
     return(
         <div className="">
                 <PlaylistsHeadr imageSrc="">Plailist</PlaylistsHeadr>
+                <Player />
             <div className="p-5">
                 <Table>
                     <TableHeader className="">
