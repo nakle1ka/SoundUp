@@ -8,7 +8,7 @@ interface LayoutRepertoireProps {
 
 const LayoutRepertoire: React.FC<LayoutRepertoireProps> = ({ children }) => {
     return (
-        <div className="bg-[#121212] rounded-lg text-white p-5">
+        <div className="bg-[#121212] rounded-lg text-white">
             {children}
         </div>
     );
