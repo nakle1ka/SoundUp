@@ -13,12 +13,13 @@ import PlaylistsHeadr from "@/components/container/playlist/PlaylistHeadr";
 import Link from "next/link";
 import Image from "next/image";
 import Player from "@/components/container/playlist/Player";
+import OtherAlbums from "@/components/container/playlist/OtherAlbums";
 
 
     const songs = [
         {
             id: '1' ,
-            avatar: 'https://avatars.mds.yandex.net/i?id=ea6699b8e531b3a9c151ab4756a52ece720fd700-5235116-images-thumbs&n=13',
+            avatar: 'c',
             name: 'aaaaa',
             authors: 'bbbb',
             musicAudioId: '3:33',
@@ -75,6 +76,9 @@ import Player from "@/components/container/playlist/Player";
                             </TableBody>
                         </Table>
                     </div>
+                <div>
+                    <OtherAlbums>name album</OtherAlbums>
+                </div>
             </div>
         )
     };
