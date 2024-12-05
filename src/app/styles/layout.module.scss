@@ -1,3 +1,4 @@
+@import '@/SCSS/vars.scss';
 @import "@/SCSS/layoutVars.scss";
 
 .wrapper {
@@ -7,8 +8,19 @@
     grid-template-rows: $headerHeight 1fr $playerHeight;
 }
 
-
 #container {
     display: grid;
     grid-template-columns: $playListColumnWidth 1fr auto;
+    gap: $gap;
+    background-color: $bgColor;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    overflow: hidden;
+}
+
+.main {
+    background-color: $mainColor;
+    border-radius: 10px;
+    overflow: auto;
 }
