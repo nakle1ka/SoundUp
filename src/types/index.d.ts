@@ -1,19 +1,20 @@
 enum MusicCategories {
-    Pop,
-    HipHop,
-    Rock,
-    Electronic,
-    Phonk,
-    Country,
-    Jazz,
-    Indie,
-    Classical,
+    Pop = "Pop",
+    HipHop = "HipHop",
+    Rock = "Rock",
+    Electronic = "Electronic",
+    Phonk = "Phonk",
+    Country = "Country",
+    Jazz = "Jazz",
+    Indie = "Indie",
+    Classical = "Classical",
 }
 
 interface Music {
     id: string;
     avatar: string;
     name: string;
+    authors: string[];
     musicAudioId: string;
 
     category: MusicCategories;

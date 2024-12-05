@@ -1,0 +1,24 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/layoutVars.scss';
+@import '@/SCSS/mixins.scss';
+
+#container {
+    display: grid;
+    grid-template-columns: $playListColumnWidth auto 1fr auto;
+    grid-template-rows: $playerHeight;
+    gap: $gap;
+
+    background-color: $bgColor;
+
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .img {
+        display: block;
+        width: auto !important;
+        height: 80% !important;
+        aspect-ratio: 1 / 1;
+        margin: auto;
+        border-radius: 5px;
+    }
+}

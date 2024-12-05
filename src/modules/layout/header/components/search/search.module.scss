@@ -1,0 +1,32 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/mixins.scss';
+
+.container {
+    width: 400px;
+    height: 100%;
+    border-radius: 200px;
+    overflow: hidden;
+
+    @include FC;
+
+    padding: 0 10px;
+
+    background-color: $secondColor;
+}
+
+.ico {
+    color: white;
+    width: 20px;
+    height: 20px;
+}
+
+.input {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 13px;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: transparent;
+}

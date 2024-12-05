@@ -1,0 +1,15 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/mixins.scss';
+@import '../musicControlls/musicControlls.module.scss';
+
+.volume {
+    @include FC;
+    gap: 5px;
+    flex: 1 1 auto;
+
+    .volumeIco {
+        color: $grayColor;
+
+        @include iconSize();
+    }
+}

@@ -1,0 +1,47 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/layoutVars.scss';
+@import '@/SCSS/mixins.scss';
+
+.container {
+    height: 100%;
+    background-color: $mainColor;
+    border-radius: 10px;
+    overflow: hidden;
+
+    .content {
+        padding: 5px 15px;
+    }
+
+    .img {
+        width: 80% !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1;
+
+        margin: 10px auto;
+        border-radius: 10px;
+    }
+
+    .name, .author {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .name {
+        font-size: 22px;
+        line-height: 90%;
+        color: white;
+    }
+
+    .author {
+        color: $grayColor;
+    }
+}
+
+.closed {
+    width: 0;
+}
+
+.opened {
+    width: 300px;
+}
+

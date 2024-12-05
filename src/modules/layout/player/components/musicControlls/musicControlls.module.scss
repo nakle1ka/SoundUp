@@ -1,0 +1,28 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/mixins.scss';
+
+$iconSize: 18px;
+
+@mixin iconSize() {
+    width: $iconSize;
+    height: $iconSize;
+}
+
+.container {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .toggleMenu {
+        color: $grayColor;
+
+        @include iconSize();
+
+        transition: all .2s;
+    }
+
+    .active {
+        color: white;
+    }
+}
