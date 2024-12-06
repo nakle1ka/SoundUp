@@ -19,7 +19,7 @@ import OtherAlbums from "@/components/container/playlist/OtherAlbums";
     const songs = [
         {
             id: '1' ,
-            avatar: 'c',
+            avatar: 'https://avatars.mds.yandex.net/i?id=7391869d7a8a7141305333985804969b_l-5222489-images-thumbs&n=13',
             name: 'aaaaa',
             authors: 'bbbb',
             musicAudioId: '3:33',
@@ -44,9 +44,9 @@ import OtherAlbums from "@/components/container/playlist/OtherAlbums";
     
         return (
             <div className="">
-                <PlaylistsHeadr imageSrc="https://avatars.yandex.net/get-music-content/10103188/da7dc9b8.a.26575538-1/m1000x1000?webp=false">album</PlaylistsHeadr>
+                <PlaylistsHeadr imageSrc="https://avatars.mds.yandex.net/i?id=7391869d7a8a7141305333985804969b_l-5222489-images-thumbs&n=13">album</PlaylistsHeadr>
                 <Player/>
-                    <div className="p-5">
+                    <div className="p-5 mb-[70px]">
                         <Table>
                             <TableHeader className="rounded-md">
                                 <TableRow className="rounded-[20px]">
@@ -77,7 +77,7 @@ import OtherAlbums from "@/components/container/playlist/OtherAlbums";
                         </Table>
                     </div>
                 <div>
-                    <OtherAlbums>name album</OtherAlbums>
+                    <OtherAlbums>Name album</OtherAlbums>
                 </div>
             </div>
         )
