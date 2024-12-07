@@ -102,7 +102,7 @@ const footerColums: { name: string; links: FooterLink[] }[] = [
 
 export const ProfileFooter: FC<Props> = ({ className }) => {
     return (
-        <div className={cn("px-4 mt-24", className)}>
+        <div className={cn("px-4 mt-auto pt-24", className)}>
             <div className="flex lg:gap-16 gap-8 justify-between border-b-gray-800 border-b pb-12 flex-col md:flex-row">
                 <div className="flex justify-between gap-2 flex-col md:flex-row">
                     {footerColums.map(({ name, links }, index) => (

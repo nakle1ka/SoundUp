@@ -11,7 +11,7 @@ export const ProfileTopBg: FC<PropsWithChildren<Props>> = ({
     return (
         <div className={cn(className)}>
             <div
-                className={`absolute w-full h-3/4 bg-gradient-to-t from-transparent to-orange-800 -z-10`}
+                className={`absolute w-full h-[100vh] bg-gradient-to-t from-transparent to-orange-800 z-[5]`}
             >
                 {children}
             </div>

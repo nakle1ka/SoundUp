@@ -4,18 +4,25 @@ import { FC, useRef } from "react";
 import { useElementSize } from "@reactuses/core";
 import { cn } from "@/lib/utils";
 import { ContentCard } from "./content-card";
+import {
+    contentCardBreakPoint,
+    contentCardGaps,
+    countContentCardsInRow,
+} from "./constants";
 
-const initialWidth = 1650;
+const getCartWidth = (width: number) =>
+    width < contentCardBreakPoint ? contentCardGaps[0] : contentCardGaps[1];
 
 const getCountAuthorCards = (width: number) => {
     let count = 0;
-    let currentWidth = initialWidth;
+    let currentWidth = getCartWidth(width) * countContentCardsInRow;
 
     while (width < currentWidth) {
-        currentWidth -= 182;
+        currentWidth -= getCartWidth(width);
         count += 1;
     }
-    return 10 - count;
+
+    return countContentCardsInRow - count;
 };
 
 interface Props {
@@ -62,7 +69,7 @@ export const ContentCardRow: FC<Props> = ({
                 className={cn(
                     // getCountAuthorCards(width) <= content.length &&
                     //     "justify-between",
-                    "flex gap-7 overflow-hidden 2xl:gap-10"
+                    "flex gap-4 overflow-hidden 2xl:gap-6"
                 )}
             >
                 {content

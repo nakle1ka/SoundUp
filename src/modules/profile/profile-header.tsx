@@ -1,12 +1,12 @@
 "use client";
 
 import { FC, useRef } from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useElementSize } from "@reactuses/core";
 
 interface Props {
-    image: StaticImageData;
+    imageUrl: string;
     name: string;
     subsribeCount: number;
     openPlaylistCount: number;
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const ProfileHeader: FC<Props> = ({
-    image,
+    imageUrl,
     name,
     subsribeCount,
     openPlaylistCount,
@@ -37,7 +37,7 @@ export const ProfileHeader: FC<Props> = ({
                     className="rounded-full"
                     width={size}
                     height={size}
-                    src={image}
+                    src={imageUrl}
                     alt={"Avatar"}
                 />
             </div>

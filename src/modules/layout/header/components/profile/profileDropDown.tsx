@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { FC } from 'react';
+import { FC } from "react";
 
 import {
     DropdownMenu,
@@ -8,47 +8,40 @@ import {
     DropdownMenuContent,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuItem
+    DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage
-} from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import styles from "./profileDropDown.module.scss"
+import styles from "./profileDropDown.module.scss";
+import Link from "next/link";
 
-type Props = {
+type Props = {};
 
-}
-
-export const ProfileDropDown: FC<Props> = ({ }) => {
+export const ProfileDropDown: FC<Props> = ({}) => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className={styles.container}>
-
                 <div className={styles.avatarContainer}>
                     <Avatar className={styles.avatar}>
-                        <AvatarImage src="https://github.com/shadcn.png" className={styles.image} />
+                        <AvatarImage
+                            src="https://github.com/shadcn.png"
+                            className={styles.image}
+                        />
                         <AvatarFallback>?</AvatarFallback>
                     </Avatar>
                 </div>
-
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
 
-                <DropdownMenuItem>Профиль</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
+                <DropdownMenuItem>
+                    <Link href="/profile">Профиль</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>Выход</DropdownMenuItem>
-
             </DropdownMenuContent>
         </DropdownMenu>
-
     );
-}
+};

@@ -1,5 +1,4 @@
 import { ProfileHeader } from "@/modules/profile/profile-header";
-import Avatar from "../../../../public/assets/logo.jpg";
 import { ProfileTopAuthors } from "@/modules/profile/profile-top-authors";
 import { ProfilePlaylists } from "@/modules/profile/profile-playlists";
 import { ProfileSubscribers } from "@/modules/profile/profile-subscribers";
@@ -8,18 +7,19 @@ import { ProfileTopBg } from "@/components/profile/profile-top-bg";
 
 export default function Profile() {
     return (
-        <>
+        <div className="relative z-10 flex flex-col min-h-full">
             <ProfileTopBg />
             <ProfileHeader
-                image={Avatar}
+                className="relative z-30"
+                imageUrl={"/assets/logo.jpg"}
                 name="CatMario"
                 subsribeCount={5}
                 openPlaylistCount={5}
             />
-            <ProfileTopAuthors className="z-30" />
-            <ProfilePlaylists />
-            <ProfileSubscribers />
-            <ProfileFooter />
-        </>
+            <ProfileTopAuthors className="relative z-30" />
+            <ProfilePlaylists className="relative z-30" />
+            <ProfileSubscribers className="relative z-30" />
+            <ProfileFooter className="relative z-30" />
+        </div>
     );
 }
