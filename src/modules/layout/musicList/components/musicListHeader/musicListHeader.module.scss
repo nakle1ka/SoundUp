@@ -1,0 +1,40 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/layoutVars.scss';
+@import '@/SCSS/mixins.scss';
+
+.container {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    @include FC;
+    gap: 5px;
+    justify-content: space-between;
+
+    padding: 15px;
+
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+
+    border-bottom: 1px solid $secondColor;
+
+    -webkit-box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.15);
+
+    overflow: hidden;
+
+    .x {
+        color: $grayColor;
+    }
+
+    .title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 500;
+        color: white;
+    }
+}

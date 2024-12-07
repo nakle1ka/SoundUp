@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 
-import { Header } from "@/modules/shared/header";
 import { Container } from "@/components/container/container";
+import { Header } from "@/modules/layout/header";
+import { LayoutPlaylists } from "@/modules/layout/layoutPlaylists";
+import { MusicList } from "@/modules/layout/musicList";
+import { Player } from "@/modules/layout/player";
 
 import { Poppins } from "next/font/google"
 import styles from "./styles/layout.module.scss"
@@ -27,14 +30,19 @@ export default function RootLayout({
       <body
         className={`${poppins.className}`}
       >
-        {/* <div className={styles.wrapper}> */}
-          {/* <Header /> */}
-          {/* <Container id={styles.container}> */}
-            <main>
+
+        <div className={styles.wrapper}>
+          <Header />
+          <Container id={styles.container}>
+            <LayoutPlaylists />
+            <main className={styles.main}>
               {children}
             </main>
-          {/* </Container> */}
-        {/* </div> */}
+            <MusicList />
+          </Container>
+          <Player />
+        </div>
+
       </body>
     </html>
   );

@@ -1,0 +1,15 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/layoutVars.scss';
+@import '@/SCSS/mixins.scss';
+
+.btn {
+    width: auto !important;
+    height: 100% !important;
+    aspect-ratio: 1 / 1;
+    
+    svg {
+        width: 100%;
+        height: 100%;
+        color: $grayColor;
+    }
+}

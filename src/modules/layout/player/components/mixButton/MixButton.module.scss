@@ -1,0 +1,22 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/mixins.scss';
+
+.button {
+    color: $grayColor;
+
+    height: 100%;
+    aspect-ratio: 1 / 1;
+
+    cursor: pointer;
+
+    &:hover .ico {
+        color: white;
+    }
+
+    .ico {
+        height: 100%;
+        aspect-ratio: 1 / 1;
+
+        transition: all .2s;
+    }
+}
