@@ -7,11 +7,13 @@ import { ContentCard } from "./content-card";
 import {
     contentCardBreakPoint,
     contentCardGaps,
+    contentCardSize,
     countContentCardsInRow,
 } from "./constants";
 
 const getCartWidth = (width: number) =>
-    width < contentCardBreakPoint ? contentCardGaps[0] : contentCardGaps[1];
+    contentCardSize +
+    (width < contentCardBreakPoint ? contentCardGaps[0] : contentCardGaps[1]);
 
 const getCountAuthorCards = (width: number) => {
     let count = 0;
