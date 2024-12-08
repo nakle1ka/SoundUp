@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, {useState} from "react";
 import {
     Table,
     TableBody,
@@ -39,7 +39,7 @@ import OtherAlbums from "@/components/container/playlist/OtherAlbums";
 
     
     const AlbumPage = () => {
-
+        const [playlists, setPlaylists] = useState([] as Playlist[]);
 
     
         return (

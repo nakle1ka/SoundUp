@@ -30,14 +30,14 @@ const PlaylistsHeadr: React.FC<LayoutPlaylistsHeadr> = ({ children, imageSrc }) 
     }, [imageSrc]);
 
     return (
-        <div className="w-full h-[200px] p-5" style={{ backgroundColor: bgColor }}>
+        <div className="w-full h-[270px] p-5" style={{ backgroundColor: bgColor }}>
             <div className="inline-block">
                 <Link href='/'>
                     <Image
                         src={imageSrc}
                         alt="icon"
-                        width={150}
-                        height={150}
+                        width={230}
+                        height={230}
                         className="hover:scale-105 shadow-2xl duration-1000 rounded"
                     />
                 </Link>

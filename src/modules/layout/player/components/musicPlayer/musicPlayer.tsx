@@ -25,6 +25,7 @@ export const MusicPlayer: FC<Props> = ({ musicData, playistLength, activeIndex }
     // Я сам в шоке какие костыли пришлось придумывать
     // Но это единственная "нормальная" библиотека, которую я нашёл
     // Если вы знаете получше, пожалуйта, подскажите :)
+
     useEffect(() => {
         if(ref.current) {
             if(ref.current.audio.current) {
