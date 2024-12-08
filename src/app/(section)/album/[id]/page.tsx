@@ -46,23 +46,38 @@ import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
     const AlbumPage = () => {
         const { isPaus, paus } = usePlayStore();
         const { hoveredIndex, setHoveredIndex } = useAlbumStore();
+        const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null); // To manage audio playbac
 
+        const playAudio = (audioId: string) => {
+                try {
+                    if (currentAudio) {
+                        currentAudio.pause(); // Пауза текущего воспроизводимого аудио
+                    }
+                    const audio = new Audio(audioId); // Создаем новый объект Audio с указанным audioId
+                    setCurrentAudio(audio); // Устанавливаем текущее аудио на только что созданное
+                    audio.play(); // Воспроизводим новое аудио
+                    audio.onended = () => setCurrentAudio(null); // Очищаем текущее аудио по окончании воспроизведения
+                } catch (error) {
+                    console.error("Ошибка при воспроизведении аудио:", error); // Логируем любые ошибки
+                }
+            };
+    
         return (
             <div className="">
                 <PlaylistsHeadr imageSrc="https://avatars.mds.yandex.net/i?id=7391869d7a8a7141305333985804969b_l-5222489-images-thumbs&n=13">album</PlaylistsHeadr>
-                <Player/>
-                    <div className="p-5 mb-[70px]">
-                        <Table>
-                            <TableHeader className="rounded-md">
-                                <TableRow className="rounded-[20px]">
-                                    <TableHead className="w-[100px] ">#</TableHead>
-                                    <TableHead>Title</TableHead>
-                                    <TableHead>Album</TableHead>
-                                    <TableHead>Date of addition</TableHead>
-                                    <TableHead className="flex justify-end items-center "><Clock3/></TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
+                <Player />
+                <div className="p-5 mb-[70px]">
+                    <Table>
+                        <TableHeader className="rounded-md">
+                            <TableRow className="rounded-[20px]">
+                                <TableHead className="w-[100px] ">#</TableHead>
+                                <TableHead>Title</TableHead>
+                                <TableHead>Album</TableHead>
+                                <TableHead>Date of addition</TableHead>
+                                <TableHead className="flex justify-end items-center "><Clock3 /></TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
                             {songs.map((song, index) => (
                                 <TableRow 
                                     key={song.id} 
@@ -70,9 +85,13 @@ import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
                                     onMouseEnter={() => setHoveredIndex(index)} 
                                     onMouseLeave={() => setHoveredIndex(null)}
                                 >
-                                    <TableCell className={`font-medium group relative ${isPaus ? 'text-[#21de83]':''}`}>
+                                    <TableCell className={`font-medium group relative ${isPaus ? 'text-[#21de83]' : ''}`}>
                                         {hoveredIndex === index ? 
-                                            <ButtonPlay className="p-2 rounded text-sm" variant="primary"/>
+                                            <ButtonPlay 
+                                                className="p-2 rounded text-sm" 
+                                                variant="primary" 
+                                                onClick={() => playAudio(song.musicAudioId)} // Убедитесь, что эта строка правильно вызывает playAudio
+                                            />
                                             : 
                                             index + 1}
                                     </TableCell>
@@ -81,23 +100,23 @@ import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
                                             <Image src={song.avatar} alt="sdf" width={50} height={50} className="rounded" />
                                         </div>
                                         <div className="inline-block ml-[10px] align-top">
-                                            <div><Link href='/' className={`hover:underline ${isPaus ? 'text-[#21de83]':''}`}>{song.name}</Link></div>
-                                            <div><Link href='/' className="hover:underline">{song.authors}</Link></div>
+                                            <div><Link href='/' className={`hover:underline ${isPaus ? 'text-[#21de83]' : ''}`}>{song.name}</Link></div>
+                                            <div><Link href='/' className="hover:underline">{song.authors.join(", ")}</Link></div>
                                         </div>
                                     </TableCell>
                                     <TableCell><Link href='/' className="hover:underline">{song.album}</Link></TableCell>
                                     <TableCell>{song.createdAt.toLocaleDateString()}</TableCell>
-                                    <TableCell className="text-right">{}</TableCell>
+                                    <TableCell className="text-right">{/* Other conditions or elements can go here */}</TableCell>
                                 </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </div>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </div>
                 <div>
                     <OtherAlbums>Name album</OtherAlbums>
                 </div>
             </div>
-        )
+        );
     };
     
     export default AlbumPage;
