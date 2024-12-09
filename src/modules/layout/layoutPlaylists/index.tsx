@@ -14,20 +14,18 @@ type Props = {
 }
 
 export const LayoutPlaylists: FC<Props> = () => {
-    const router = useRouter(); 
     const [playlists, setPlaylists] = useState([] as Playlist[])
 
     useEffect(() => {
         async function fetchData() {
             try {
-                apiClient
+                const playlistsData: Playlist[] = await apiClient
                     .get('/api/GetRequestsPlaylist/GetUserPlaylists')
-                    .catch((e: Error) => {
-                        e.message == 'unauthorized' && router.push('/auth');
-                    })
+
+                setPlaylists(playlistsData)
             }
             catch (e) {
-                router.push('/auth')
+                console.error(e)
             }
         }
 
@@ -50,7 +48,7 @@ export const LayoutPlaylists: FC<Props> = () => {
             {
                 playlists.length && (
                     playlists.map(el => (
-                        <div></div>
+                        <div>sdsad</div>
                     ))
                 )
             }

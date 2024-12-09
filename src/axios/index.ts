@@ -4,7 +4,6 @@ import {
     getUserId,
     getRefreshToken,
 } from '../utils/tokens';
-import { get } from 'http';
 
 const apiClient = axios.create({
     baseURL: process.env.serverApi,
