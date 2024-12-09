@@ -10,23 +10,22 @@ import { useRouter } from "next/navigation";
 type Props = {};
 
 export const LayoutPlaylists: FC<Props> = () => {
-    const router = useRouter();
     const [playlists, setPlaylists] = useState([] as Playlist[]);
 
     useEffect(() => {
-        // async function fetchData() {
-        //     try {
-        //         apiClient
-        //             .get('/api/GetRequestsPlaylist/GetUserPlaylists')
-        //             .catch((e: Error) => {
-        //                 e.message == 'unauthorized' && router.push('/auth');
-        //             })
-        //     }
-        //     catch (e) {
-        //         router.push('/auth')
-        //     }
-        // }
-        // fetchData();
+        async function fetchData() {
+            try {
+                const playlistsData: Playlist[] = await apiClient.get(
+                    "/api/GetRequestsPlaylist/GetUserPlaylists"
+                );
+
+                setPlaylists(playlistsData);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        fetchData();
     }, []);
 
     return (
@@ -36,7 +35,7 @@ export const LayoutPlaylists: FC<Props> = () => {
                     <Skeleton className={styles.skeleton} key={i} />
                 ))}
 
-            {playlists.length && playlists.map((el) => <div></div>)}
+            {playlists.length && playlists.map((el) => <div>sdsad</div>)}
         </div>
     );
 };

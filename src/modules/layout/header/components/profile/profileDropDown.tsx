@@ -2,6 +2,8 @@
 
 import { FC } from "react";
 
+import Link from "next/link";
+
 import {
     DropdownMenu,
     DropdownMenuTrigger,
@@ -16,9 +18,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import styles from "./profileDropDown.module.scss";
 import Link from "next/link";
 
-type Props = {};
-
-export const ProfileDropDown: FC<Props> = ({}) => {
+export const ProfileDropDown: FC = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className={styles.container}>
@@ -33,14 +33,16 @@ export const ProfileDropDown: FC<Props> = ({}) => {
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>Аккаунт</DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
 
                 <DropdownMenuItem>
                     <Link href="/profile">Профиль</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>Выход</DropdownMenuItem>
+                <DropdownMenuItem>
+                    <button>Выход</button>
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );
