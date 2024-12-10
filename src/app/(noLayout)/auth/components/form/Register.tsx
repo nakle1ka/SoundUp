@@ -1,21 +1,27 @@
-import axios from 'axios';
-import { FC, useState } from 'react';
-import { SubmitHandler, useForm, Controller } from 'react-hook-form';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import axios from "axios";
+import { FC, useState } from "react";
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
-import { Indicator } from '../indicator/indicator';
-import { SubmitBtn } from '../submitBtn/submitBtn';
-import { useRouter } from 'next/navigation';
+import { Indicator } from "../indicator/indicator";
+import { SubmitBtn } from "../submitBtn/submitBtn";
+import { useRouter } from "next/navigation";
 
-import routes from '@/types/routes';
-import styles from './../../auth.module.scss';
+import routes from "@/types/routes";
+import styles from "./../../auth.module.scss";
 
 type TData = {
-    userName: string,
-    password: string,
-    confirmPass: String,
-    userType: string
-}
+    userName: string;
+    password: string;
+    confirmPass: String;
+    userType: string;
+};
 
 const Register: FC = () => {
     const {
@@ -31,10 +37,9 @@ const Register: FC = () => {
 
     const onSubmit: SubmitHandler<TData> = async (data: TData) => {
         try {
-            const res = (await axios.post(routes.REGISTER, data));
-            res.statusText == 'OK' && router.push('/')
-        }
-        catch (err) {
+            const res = await axios.post(routes.REGISTER, data);
+            res.statusText == "OK" && router.push("/");
+        } catch (err) {
             setServerError(true);
         }
     };
@@ -47,11 +52,9 @@ const Register: FC = () => {
                     <input
                         type="text"
                         placeholder="Введите логин"
-                        {...register('userName', { required: 'Не заполнено' })}
+                        {...register("userName", { required: "Не заполнено" })}
                     />
-                    {errors.userName && (
-                        <Indicator />
-                    )}
+                    {errors.userName && <Indicator />}
                 </fieldset>
 
                 <fieldset className={styles.fieldsetInput}>
@@ -59,60 +62,65 @@ const Register: FC = () => {
                     <input
                         type="password"
                         placeholder="Введите пароль"
-                        {...register('password', { required: 'Не заполнено' })}
+                        {...register("password", { required: "Не заполнено" })}
                     />
-                    {errors.password && (
-                        <Indicator />
-                    )}
+                    {errors.password && <Indicator />}
                 </fieldset>
 
                 <fieldset className={styles.fieldsetInput}>
-                    <legend className={styles.legendInput}>Подтвердите пароль</legend>
+                    <legend className={styles.legendInput}>
+                        Подтвердите пароль
+                    </legend>
                     <input
                         type="password"
-                        placeholder="Повторите пароль"
-                        {...register('confirmPass', {
-                            required: 'Не заполнено',
+                        placeholder="Введите пароль"
+                        {...register("confirmPass", {
+                            required: "Не заполнено",
                             validate: (value) =>
-                                value === getValues('password') || 'Пароли не совпадают',
+                                value === getValues("password") ||
+                                "Пароли не совпадают",
                         })}
                     />
 
-                    {errors.confirmPass && (
-                        <Indicator />
-                    )}
+                    {errors.confirmPass && <Indicator />}
                 </fieldset>
 
-
                 <fieldset className={styles.fieldsetInput}>
-                    <legend className={styles.legendInput}>Тип пользователя</legend>
+                    <legend className={styles.legendInput}>
+                        Тип пользователя
+                    </legend>
                     <Controller
                         name="userType"
                         control={control}
-                        rules={{ required: 'Не заполнено' }}
+                        rules={{ required: "Не заполнено" }}
                         render={({ field }) => (
-                            <Select onValueChange={field.onChange} value={field.value || ''}>
+                            <Select
+                                onValueChange={field.onChange}
+                                value={field.value || ""}
+                            >
                                 <SelectTrigger className="w-full px-1">
                                     <SelectValue placeholder="Выберите роль" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="User">Слушатель</SelectItem>
-                                    <SelectItem value="UserAuthor">Исполнитель</SelectItem>
+                                    <SelectItem value="User">
+                                        Слушатель
+                                    </SelectItem>
+                                    <SelectItem value="UserAuthor">
+                                        Исполнитель
+                                    </SelectItem>
                                 </SelectContent>
                             </Select>
                         )}
                     />
-                    {errors.userType && (
-                        <Indicator />
-                    )}
+                    {errors.userType && <Indicator />}
                 </fieldset>
 
                 <SubmitBtn />
 
                 {serverError && (
-                    <p
-                        className='text-[red] w-full text-center'
-                    >Пользователь не найден</p>
+                    <p className="text-[red] w-full text-center">
+                        Пользователь не найден
+                    </p>
                 )}
             </form>
         </>
