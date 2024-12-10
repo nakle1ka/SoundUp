@@ -6,7 +6,7 @@ import {
 } from '../utils/tokens';
 
 const apiClient = axios.create({
-    baseURL: process.env.serverApi,
+    baseURL: process.env.NEXT_PUBLIC_SERVER_API,
 })
 
 apiClient.interceptors.request.use(function (config) {
