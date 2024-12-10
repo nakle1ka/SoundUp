@@ -8,7 +8,7 @@ import { Player } from "@/modules/layout/player";
 
 import { Poppins } from "next/font/google";
 import styles from "./styles/layout.module.scss";
-import "./globals.css";
+import "../globals.css";
 
 const poppins = Poppins({
     weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
