@@ -70,7 +70,7 @@ const Register: FC = () => {
                     <legend className={styles.legendInput}>Подтвердите пароль</legend>
                     <input
                         type="password"
-                        placeholder="Введите пароль"
+                        placeholder="Повторите пароль"
                         {...register('confirmPass', {
                             required: 'Не заполнено',
                             validate: (value) =>
