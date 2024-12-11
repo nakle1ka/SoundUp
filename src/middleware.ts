@@ -9,11 +9,11 @@ export async function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
     const serverApi = process.env.NEXT_PUBLIC_SERVER_API;
 
-    const accessToken = req.cookies.get("accessToken")?.value;
+    const accessToken = req.cookies.get("accessToken")?.value || "null";
     const refreshToken = req.cookies.get("refreshToken")?.value;
     const userId = req.cookies.get("userId")?.value;
 
-    if (!accessToken || !refreshToken) {
+    if (!refreshToken) {
         return NextResponse.redirect(new URL("/auth", url));
     }
 
@@ -23,17 +23,16 @@ export async function middleware(req: NextRequest) {
                 Authorization: "bearer " + accessToken,
             },
         });
-        console.log("ok");
 
         return NextResponse.next();
     } catch (error: AxiosError | any) {
-        console.log(error);
+        console.log(error.status);
 
-        if (error.response?.status === 401 && refreshToken) {
+        if (error.status === 401 && refreshToken) {
             try {
                 const response = await axios.post(
-                    serverApi + routes.VALIDATE_REFRESH_TOKEN,
-                    { refreshToken },
+                    serverApi + routes.GET_NEW_TOKEN,
+                    { refreshToken, userId },
                     {
                         headers: {
                             Authorization: "bearer " + accessToken,
@@ -54,16 +53,18 @@ export async function middleware(req: NextRequest) {
                 res.cookies.set("refreshToken", newRefreshToken);
 
                 return res;
-            } catch (refreshError) {
+            } catch (refreshError: AxiosError | any) {
+                console.log(refreshError.response);
                 return NextResponse.redirect(new URL(`/auth`, url));
             }
         }
 
         console.error("Ошибка при проверке access токена:", error);
-        return NextResponse.redirect(new URL(`/test?err=${error}`, url));
+        return NextResponse.redirect(new URL(`/auth`, url));
     }
 }
 
 export const config = {
-    matcher: ["/"], // Допишите свои роуты кому надо
+    // Допишите свои роуты кому надо
+    matcher: ["/"],
 };

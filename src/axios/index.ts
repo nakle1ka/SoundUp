@@ -9,13 +9,15 @@ apiClient.interceptors.request.use(
     function (config) {
         const token = getAccessToken();
         const userId = getUserId();
+        const refreshToken = getRefreshToken();
 
         if (!token || !userId) {
             throw new Error("unauthorized");
         }
 
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `bearer ${token}`;
         config.headers.userId = userId;
+        config.headers.refreshToken = refreshToken;
 
         return config;
     },
