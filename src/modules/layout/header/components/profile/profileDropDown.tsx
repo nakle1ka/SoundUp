@@ -1,6 +1,8 @@
 'use client'
 
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import apiClient from '@/axios';
 
 import Link from 'next/link';
 
@@ -19,16 +21,40 @@ import {
     AvatarImage
 } from '@/components/ui/avatar';
 
+import { deleteCookieByName } from '@/utils/tokens';
+
+import routes from '@/types/routes';
 import styles from "./profileDropDown.module.scss"
+import { LogOut, User } from 'lucide-react';
 
 export const ProfileDropDown: FC = () => {
+    const router = useRouter();
+
+    const [avatarData, setAvatarData] = useState<string>("");
+
+    useEffect(() => {
+        async function fetchData() {
+            const resData: User = (await apiClient.get(routes.GET_USER)).data
+            setAvatarData(resData.avatar)
+        }
+
+        fetchData()
+    }, [])
+
+    function handleLogout() {
+        deleteCookieByName('accessToken');
+        deleteCookieByName('refreshToken');
+        deleteCookieByName('userId');
+        router.push('/auth');
+    }
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className={styles.container}>
 
                 <div className={styles.avatarContainer}>
                     <Avatar className={styles.avatar}>
-                        <AvatarImage src="https://github.com/shadcn.png" className={styles.image} />
+                        <AvatarImage src={avatarData} className={styles.image} />
                         <AvatarFallback>?</AvatarFallback>
                     </Avatar>
                 </div>
@@ -41,12 +67,15 @@ export const ProfileDropDown: FC = () => {
                 <DropdownMenuSeparator />
 
                 <DropdownMenuItem>
-                    <Link href="/profile">
+                    <Link href="/profile" className={styles.profile}>
+                        <User />
                         Профиль
                     </Link>
                 </DropdownMenuItem>
+
                 <DropdownMenuItem>
-                    <button>
+                    <button onClick={handleLogout} className={styles.logoutButton}>
+                        <LogOut />
                         Выход
                     </button>
                 </DropdownMenuItem>
