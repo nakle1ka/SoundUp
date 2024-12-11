@@ -1,6 +1,10 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import apiClient from "@/axios";
+
+import Link from "next/link";
 
 import {
     DropdownMenu,
@@ -13,19 +17,40 @@ import {
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+import { deleteCookieByName } from "@/utils/tokens";
+
+import routes from "@/types/routes";
 import styles from "./profileDropDown.module.scss";
-import Link from "next/link";
+import { LogOut, User } from "lucide-react";
 
-type Props = {};
+export const ProfileDropDown: FC = () => {
+    const router = useRouter();
 
-export const ProfileDropDown: FC<Props> = ({}) => {
+    const [avatarData, setAvatarData] = useState<string>("");
+
+    useEffect(() => {
+        async function fetchData() {
+            const resData: User = (await apiClient.get(routes.GET_USER)).data;
+            setAvatarData(resData.avatar);
+        }
+
+        fetchData();
+    }, []);
+
+    function handleLogout() {
+        deleteCookieByName("accessToken");
+        deleteCookieByName("refreshToken");
+        deleteCookieByName("userId");
+        router.push("/auth");
+    }
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className={styles.container}>
                 <div className={styles.avatarContainer}>
                     <Avatar className={styles.avatar}>
                         <AvatarImage
-                            src="https://github.com/shadcn.png"
+                            src={avatarData}
                             className={styles.image}
                         />
                         <AvatarFallback>?</AvatarFallback>
@@ -38,9 +63,21 @@ export const ProfileDropDown: FC<Props> = ({}) => {
                 <DropdownMenuSeparator />
 
                 <DropdownMenuItem>
-                    <Link href="/profile">Профиль</Link>
+                    <Link href="/profile" className={styles.profile}>
+                        <User />
+                        Профиль
+                    </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>Выход</DropdownMenuItem>
+
+                <DropdownMenuItem>
+                    <button
+                        onClick={handleLogout}
+                        className={styles.logoutButton}
+                    >
+                        <LogOut />
+                        Выход
+                    </button>
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );
