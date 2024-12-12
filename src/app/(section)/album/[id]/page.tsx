@@ -46,21 +46,7 @@ import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
     const AlbumPage = () => {
         const { isPaus, paus } = usePlayStore();
         const { hoveredIndex, setHoveredIndex } = useAlbumStore();
-        const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null); // To manage audio playbac
 
-        const playAudio = (audioId: string) => {
-                try {
-                    if (currentAudio) {
-                        currentAudio.pause(); // Пауза текущего воспроизводимого аудио
-                    }
-                    const audio = new Audio(audioId); // Создаем новый объект Audio с указанным audioId
-                    setCurrentAudio(audio); // Устанавливаем текущее аудио на только что созданное
-                    audio.play(); // Воспроизводим новое аудио
-                    audio.onended = () => setCurrentAudio(null); // Очищаем текущее аудио по окончании воспроизведения
-                } catch (error) {
-                    console.error("Ошибка при воспроизведении аудио:", error); // Логируем любые ошибки
-                }
-            };
     
         return (
             <div className="">
@@ -90,7 +76,7 @@ import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
                                             <ButtonPlay 
                                                 className="p-2 rounded text-sm" 
                                                 variant="primary" 
-                                                onClick={() => playAudio(song.musicAudioId)} // Убедитесь, что эта строка правильно вызывает playAudio
+                                                audioId={song.musicAudioId}
                                             />
                                             : 
                                             index + 1}
@@ -106,7 +92,7 @@ import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
                                     </TableCell>
                                     <TableCell><Link href='/' className="hover:underline">{song.album}</Link></TableCell>
                                     <TableCell>{song.createdAt.toLocaleDateString()}</TableCell>
-                                    <TableCell className="text-right">{/* Other conditions or elements can go here */}</TableCell>
+                                    <TableCell className="text-right"></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
