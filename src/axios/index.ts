@@ -14,7 +14,7 @@ apiClient.interceptors.request.use(function (config) {
     const userId = getUserId();
     const refreshToken = getRefreshToken();
 
-    if (!token || !userId) {
+    if (!userId || !refreshToken) {
         throw new Error('unauthorized');
     }
 
