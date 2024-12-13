@@ -1,17 +1,18 @@
-import axios from 'axios';
+import axiosBaseUrl from '@/axios/baseUrl';
 import { FC, useState } from 'react';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Indicator } from '../indicator/indicator';
 import { SubmitBtn } from '../submitBtn/submitBtn';
 import { useRouter } from 'next/navigation';
 
 import routes from '@/types/routes';
 import styles from './../../auth.module.scss';
+import { setAccessToken, setRefreshToken, setUserId } from '@/utils/tokens';
 
 type TData = {
-    userName: string,
+    username: string,
     password: string,
     confirmPass: String,
     userType: string
@@ -30,11 +31,25 @@ const Register: FC = () => {
     const router = useRouter();
 
     const onSubmit: SubmitHandler<TData> = async (data: TData) => {
+        const { username: name, password, userType } = data;
+
         try {
-            const res = (await axios.post(routes.REGISTER, data));
-            res.statusText == 'OK' && router.push('/')
+            const res = (await axiosBaseUrl.post(routes.REGISTER, {
+                name,
+                password,
+                userType,
+            }));
+
+            const { userId, jwtToken, refreshToken } = res.data;
+
+            setAccessToken(jwtToken);
+            setRefreshToken(refreshToken);
+            setUserId(userId);
+
+            router.push('/')
         }
         catch (err) {
+            console.log(err);
             setServerError(true);
         }
     };
@@ -47,9 +62,23 @@ const Register: FC = () => {
                     <input
                         type="text"
                         placeholder="Введите логин"
-                        {...register('userName', { required: 'Не заполнено' })}
+                        {...register('username', {
+                            required: 'Не заполнено',
+                            minLength: {
+                                value: 4,
+                                message: 'Минимум 4 символа'
+                            },
+                            maxLength: {
+                                value: 20,
+                                message: 'Максимум 20 символов'
+                            },
+                            pattern: {
+                                value: /^[a-zA-Z0-9]+$/,
+                                message: 'Только латинские буквы и цифры'
+                            }
+                        })}
                     />
-                    {errors.userName && (
+                    {errors.username && (
                         <Indicator />
                     )}
                 </fieldset>
@@ -59,7 +88,13 @@ const Register: FC = () => {
                     <input
                         type="password"
                         placeholder="Введите пароль"
-                        {...register('password', { required: 'Не заполнено' })}
+                        {...register('password', {
+                            required: 'Не заполнено',
+                            pattern: {
+                                value: /[0-9a-zA-Z!@#$%^&*]/g,
+                                message: 'Только латинские буквы и цифры'
+                            },
+                        })}
                     />
                     {errors.password && (
                         <Indicator />
@@ -96,7 +131,7 @@ const Register: FC = () => {
                                     <SelectValue placeholder="Выберите роль" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="User">Слушатель</SelectItem>
+                                    <SelectItem value="DefaultUser">Слушатель</SelectItem>
                                     <SelectItem value="UserAuthor">Исполнитель</SelectItem>
                                 </SelectContent>
                             </Select>
@@ -112,7 +147,7 @@ const Register: FC = () => {
                 {serverError && (
                     <p
                         className='text-[red] w-full text-center'
-                    >Пользователь не найден</p>
+                    >Ошибка сервера</p>
                 )}
             </form>
         </>
