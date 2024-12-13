@@ -1,38 +1,47 @@
-"use client";
-import React, { ButtonHTMLAttributes, ForwardedRef, useState } from "react";
-import { Play, Pause } from 'lucide-react';
+'use client'
+import React, {ForwardedRef, useState } from "react";
+import { Play, Pause } from "lucide-react";
 import { usePlayStore } from "@/stores/albumStore";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> { 
+interface ButtonProps {
     className?: string;
-    variant?: 'default' | 'primary'; 
-    audioId?: string;
+    variant?: 'default' | 'primary';
+    audioIds: string[]; 
+    setCurrentIndex: (index: number) => void; 
+    onPlay?: (index: number) => void; 
 }
 
 const ButtonPlay = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, audioId, variant = 'default', ...props }, ref: ForwardedRef<HTMLButtonElement>) => {
-        const isOpen = usePlayStore(state => state.isPaus);
-        const paus = usePlayStore(state => state.paus);
-        
+    ({ className, variant = 'default', audioIds, setCurrentIndex, onPlay, ...props }, ref: ForwardedRef<HTMLButtonElement>) => {
+        const isPlaying = usePlayStore(state => state.isPaus);
+        const togglePause = usePlayStore(state => state.paus);
         const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
 
-        const playAudio = (audioId: string) => {
-            try {
-                if (currentAudio) {
-                    currentAudio.pause(); 
-                }
-                const audio = new Audio(audioId); 
-                setCurrentAudio(audio); 
-                audio.play();
-                audio.onended = () => setCurrentAudio(null); 
-            } catch (error) {
-                console.error("Ошибка при воспроизведении аудио:", error); 
+        const playAudio = (index: number) => {
+            if (currentAudio) {
+                currentAudio.pause(); 
             }
+            const audio = new Audio(audioIds[index]); 
+            setCurrentAudio(audio);
+            audio.play(); 
+            togglePause(); 
+            setCurrentIndex(index);
+            audio.addEventListener('ended', () => {
+                const nextIndex = (index + 1) % audioIds.length; 
+                playAudio(nextIndex);
+            });
         };
 
         const handleClick = () => {
-            playAudio(audioId);
-            paus();
+            if (isPlaying) {
+                currentAudio?.pause();
+                togglePause();
+            } else {
+                if (onPlay) {
+                    onPlay(0); 
+                }
+                playAudio(0); 
+            }
         };
 
         const variantStyles = {
@@ -40,14 +49,14 @@ const ButtonPlay = React.forwardRef<HTMLButtonElement, ButtonProps>(
             primary: 'text-white',
         };
 
-        return(
-            <button 
+        return (
+            <button
                 ref={ref}
                 onClick={handleClick}
                 className={`rounded-full flex justify-center items-center ${variantStyles[variant]} ${className}`}
                 {...props}
             >
-                {isOpen ? <Pause/> : <Play/>}
+                {isPlaying ? <Pause /> : <Play />}
             </button>
         );
     }

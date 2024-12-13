@@ -16,6 +16,7 @@ enum MusicCategories {
     name: string;
     authors: string[];
     musicAudioId: string;
+    album: string;
 
     category: string;
 

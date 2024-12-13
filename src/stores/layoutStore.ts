@@ -51,7 +51,7 @@ export const useLayoutStore = create<Store>()((set) => ({
             name: "Возвращение колдуна",
             authors: ["Король и Шут"],
             musicAudioId: "/sound/test.mp3",
-
+            album:'asd',
             category: 'Pop' as MusicCategories,
 
             createdAt: new Date("2021-01-05"), // DateTime
@@ -63,7 +63,7 @@ export const useLayoutStore = create<Store>()((set) => ({
             name: "Спокойная ночь",
             authors: ["Кино", "В. Цой"],
             musicAudioId: "/sound/test2.mp3",
-
+            album:'asd',
             category: 'Pop' as MusicCategories,
 
             createdAt: new Date("2021-01-05"), // DateTime

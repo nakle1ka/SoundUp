@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 import {
     Table,
     TableBody,
@@ -27,7 +27,6 @@ import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
             album:"asd",
             category: 'Pop' as MusicCategories,
             createdAt: new Date("2021-01-05"), // DateTime
-
         },
         {
             id: "2",
@@ -39,14 +38,34 @@ import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
             category: 'Pop' as MusicCategories,
 
             createdAt: new Date("2021-01-05"), // DateTime
-        }
+        },
+        {
+            id: "1",
+            avatar: "/assets/test3.PNG",
+            name: "DARE",
+            authors: ["Gorillaz"],
+            musicAudioId: "/sound/test3.mp3",
+            album:"asas",
+            category: 'Pop' as MusicCategories,
+            createdAt: new Date("2021-01-05"), // DateTime
+        },
     ]
 
     
     const AlbumPage = () => {
-        const { isPaus, paus } = usePlayStore();
+        const { isPaus, paus, setCurrentIndex,  setAudioIds } = usePlayStore();
         const { hoveredIndex, setHoveredIndex } = useAlbumStore();
+        
 
+        useEffect(() => {
+            const ids = songs.map(song => song.musicAudioId);
+            setAudioIds(ids);
+        }, []);
+    
+        const handlePlay = (index: number) => {
+            setCurrentIndex(index); 
+            paus();
+        };
     
         return (
             <div className="">
@@ -76,7 +95,9 @@ import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
                                             <ButtonPlay 
                                                 className="p-2 rounded text-sm" 
                                                 variant="primary" 
-                                                audioId={song.musicAudioId}
+                                                audioIds={songs.map(s => s.musicAudioId)}
+                                                setCurrentIndex={setCurrentIndex} 
+                                                onPlay={handlePlay} 
                                             />
                                             : 
                                             index + 1}

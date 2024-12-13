@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FastAverageColor } from "fast-average-color";
 
+
 interface LayoutPlaylistsHeadr {
     children: React.ReactNode;
     imageSrc: string;
@@ -17,7 +18,7 @@ const PlaylistsHeadr: React.FC<LayoutPlaylistsHeadr> = ({ children, imageSrc }) 
         const img = document.createElement("img");
 
         img.src = imageSrc;
-        img.crossOrigin = "anonymous"; // Важно для работы с изображениями из других доменов
+        img.crossOrigin = "anonymous"; 
 
         img.onload = () => {
             const color = fac.getColor(img);
