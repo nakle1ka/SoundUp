@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 
 type QueryKey = string | (string | number)[];
 
-export const useRequest = <T>(
-    queryKey: QueryKey,
-    queryFn: () => Promise<T | null>
-) => {
+const useRequest = <T>(queryKey: QueryKey, queryFn: () => Promise<T>) => {
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);

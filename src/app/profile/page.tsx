@@ -9,7 +9,13 @@ export default function Profile() {
     return (
         <div className="relative z-10 flex flex-col min-h-full">
             <ProfileTopBg />
-            <ProfileHeader className="relative z-30" />
+            <ProfileHeader
+                className="relative z-30"
+                imageUrl={"/assets/logo.jpg"}
+                name="CatMario"
+                subsribeCount={5}
+                openPlaylistCount={5}
+            />
             <ProfileTopAuthors className="relative z-30" />
             <ProfilePlaylists className="relative z-30" />
             <ProfileSubscribers className="relative z-30" />
