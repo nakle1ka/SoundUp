@@ -1,9 +1,6 @@
 "use client";
 
-import {
-    ContentCardRow,
-    ContentCartType,
-} from "@/components/content/content-card-row";
+import { ContentCardRow } from "@/components/content/content-card-row";
 import { useRequest } from "@/hooks/useRequest";
 import { cn } from "@/lib/utils";
 import { getUserPlaylists } from "@/services/playlist-service";

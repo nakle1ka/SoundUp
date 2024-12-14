@@ -1,9 +1,12 @@
+"use client";
+
 import { FooterColumn } from "@/components/profile/profile-footer-column";
 import { ProfileFooterIcon } from "@/components/profile/profile-footer-icon";
 import { ProfileFooterRow } from "@/components/profile/profile-footer-row";
 import { cn } from "@/lib/utils";
+import { useElementSize } from "@reactuses/core";
 import { Facebook, Instagram, Twitter } from "lucide-react";
-import { FC } from "react";
+import { FC, useRef } from "react";
 
 interface Props {
     className?: string;
@@ -101,10 +104,25 @@ const footerColums: { name: string; links: FooterLink[] }[] = [
 ];
 
 export const ProfileFooter: FC<Props> = ({ className }) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const [width] = useElementSize(ref);
+
     return (
         <div className={cn("px-4 mt-auto pt-24", className)}>
-            <div className="flex lg:gap-16 gap-8 justify-between border-b-gray-800 border-b pb-12 flex-col md:flex-row">
-                <div className="flex justify-between gap-2 flex-col md:flex-row">
+            <div
+                ref={ref}
+                className={cn(
+                    "flex justify-between border-b-gray-800 border-b pb-12",
+                    width >= 1024 ? "gap-16" : "gap-8",
+                    width >= 768 ? "flex-row" : "flex-col"
+                )}
+            >
+                <div
+                    className={cn(
+                        "flex justify-between gap-2",
+                        width >= 768 ? "flex-row" : "flex-col"
+                    )}
+                >
                     {footerColums.map(({ name, links }, index) => (
                         <FooterColumn name={name} links={links} key={index} />
                     ))}
