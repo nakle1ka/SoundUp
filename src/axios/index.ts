@@ -4,22 +4,23 @@ import {
     getUserId,
     getRefreshToken,
 } from '../utils/tokens';
-import { get } from 'http';
 
 const apiClient = axios.create({
-    baseURL: process.env.serverApi,
+    baseURL: process.env.NEXT_PUBLIC_SERVER_API,
 })
 
 apiClient.interceptors.request.use(function (config) {
     const token = getAccessToken();
     const userId = getUserId();
+    const refreshToken = getRefreshToken();
 
-    if (!token || !userId) {
+    if (!userId || !refreshToken) {
         throw new Error('unauthorized');
     }
 
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `bearer ${token}`;
     config.headers.userId = userId;
+    config.headers.refreshToken = refreshToken;
 
     return config;
 

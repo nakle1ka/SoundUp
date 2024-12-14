@@ -1,22 +1,45 @@
-// function getCoockieByName(name: string): string | undefined {
-//     const cookie = document.cookie.split(';').find(el => el.includes(name));
-//     return cookie?.split('=')[1];
-// }
+function getCookieByName(name: string): string | undefined {
+    const cookie = document.cookie.split(';').find(el => el.includes(name));
+    return cookie?.split('=')[1];
+}
 
-// function getAccessToken(): string | undefined {
-//     return getCoockieByName('token');
-// }
+function deleteCookieByName(name: string): void {
+    document.cookie = `${name}=; Max-Age=0; path=/;`;
+}
 
-// function getRefreshToken(): string | undefined {
-//     return getCoockieByName('refreshToken');
-// }
+function getAccessToken(): string | undefined {
+    return getCookieByName('accessToken');
+}
 
-// function getUserId(): string | undefined {
-//     return getCoockieByName('userId');
-// }
+function getRefreshToken(): string | undefined {
+    return getCookieByName('refreshToken');
+}
 
-// export {
-//     getAccessToken,
-//     getRefreshToken,
-//     getUserId
-// }
+function getUserId(): string | undefined {
+    return getCookieByName('userId');
+}
+
+function setUserId(userId: string) {
+    document.cookie = `userId=${encodeURIComponent(userId)}; path=/; samesite=strict`;
+}
+
+function setAccessToken(accessToken: string) {
+    document.cookie = `accessToken=${encodeURIComponent(accessToken)}; path=/; samesite=strict`;
+}
+
+function setRefreshToken(refreshToken: string) {
+    document.cookie = `refreshToken=${encodeURIComponent(refreshToken)}; path=/; samesite=strict`;
+}
+
+export {
+    getCookieByName,
+    getAccessToken,
+    getRefreshToken,
+    getUserId,
+
+    setUserId,
+    setAccessToken,
+    setRefreshToken,
+
+    deleteCookieByName,
+}
