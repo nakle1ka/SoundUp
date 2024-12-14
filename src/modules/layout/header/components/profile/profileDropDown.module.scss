@@ -21,17 +21,3 @@
         height: 100% !important;
     }
 }
-
-@mixin profileDropDownItem() {
-    display: flex;
-    gap: 2px;
-}
-
-.logoutButton {
-    @include profileDropDownItem();
-    color: red;
-}
-
-.profile {
-    @include profileDropDownItem();
-}

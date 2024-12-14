@@ -1,40 +1,18 @@
-function getCookieByName(name: string): string | undefined {
-    const cookie = document.cookie.split(";").find((el) => el.includes(name));
-    return cookie?.split("=")[1];
-}
-
-function deleteCookieByName(name: string): void {
-    document.cookie = `${name}=; Max-Age=0; path=/;`;
+function getCoockieByName(name: string): string | undefined {
+    const cookie = document.cookie.split(';').find(el => el.includes(name));
+    return cookie?.split('=')[1];
 }
 
 function getAccessToken(): string | undefined {
-    return getCookieByName("accessToken");
+    return getCoockieByName('token');
 }
 
 function getRefreshToken(): string | undefined {
-    return getCookieByName("refreshToken");
+    return getCoockieByName('refreshToken');
 }
 
 function getUserId(): string | undefined {
-    return getCookieByName("userId");
-}
-
-function setUserId(userId: string) {
-    document.cookie = `userId=${encodeURIComponent(
-        userId
-    )}; path=/; samesite=strict`;
-}
-
-function setAccessToken(accessToken: string) {
-    document.cookie = `accessToken=${encodeURIComponent(
-        accessToken
-    )}; path=/; samesite=strict`;
-}
-
-function setRefreshToken(refreshToken: string) {
-    document.cookie = `refreshToken=${encodeURIComponent(
-        refreshToken
-    )}; path=/; samesite=strict`;
+    return getCoockieByName('userId');
 }
 
 export function setUserId(userId: string) {
@@ -50,12 +28,7 @@ export function setRefreshToken(refreshToken: string) {
 }
 
 export {
-    getCookieByName,
     getAccessToken,
     getRefreshToken,
-    getUserId,
-    setUserId,
-    setAccessToken,
-    setRefreshToken,
-    deleteCookieByName,
-};
+    getUserId
+}

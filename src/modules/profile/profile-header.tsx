@@ -1,56 +1,29 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useRef } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import apiClient from "@/axios";
-import { useRequest } from "@/hooks/useRequest";
+import { useElementSize } from "@reactuses/core";
 
-const avatarSize = 350;
+interface Props {
+    imageUrl: string;
+    name: string;
+    subsribeCount: number;
+    openPlaylistCount: number;
+    size?: number;
+    className?: string;
+}
 
-type profileHeaderProps = { className: string };
-
-const getUser = async (): Promise<User | null> => {
-    try {
-        const userRes = await apiClient.get<User>(
-            "http://83.222.24.157/api/GetRequestsUsers/GetUser"
-        );
-        const playlistsRes = await apiClient.get<Playlist[]>(
-            "http://83.222.24.157/api/GetRequestsPlaylist/GetUserPlaylists"
-        );
-        const user = userRes.data;
-        const playlists = playlistsRes.data;
-
-        return user;
-    } catch (e) {
-        console.error("Error fetching data:", e);
-        return null;
-    }
-};
-
-const getUserPlaylists = async () => {
-    try {
-        const playlistsRes = await apiClient.get<Playlist[]>(
-            "http://83.222.24.157/api/GetRequestsPlaylist/GetUserPlaylists"
-        );
-        const playlists = playlistsRes.data;
-
-        return playlists;
-    } catch (e) {
-        console.error("Error fetching data:", e);
-        return null;
-    }
-};
-
-export const ProfileHeader: FC<profileHeaderProps> = ({ className }) => {
-    const userReq = useRequest<User>("user", getUser);
-    const playlistsReq = useRequest<Playlist[]>("playlists", getUserPlaylists);
-    const openPlaylistCount = playlistsReq.data?.length;
-    const user = userReq.data;
-
-    if (userReq.loading) return <div>Loading...</div>;
-    if (userReq.error) return <div>Error: {userReq.error}</div>;
-    if (!user) return <div>No data</div>;
+export const ProfileHeader: FC<Props> = ({
+    imageUrl,
+    name,
+    subsribeCount,
+    openPlaylistCount,
+    size = 350,
+    className,
+}) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const [width] = useElementSize(ref);
 
     return (
         <div
@@ -62,10 +35,10 @@ export const ProfileHeader: FC<profileHeaderProps> = ({ className }) => {
             <div>
                 <Image
                     className="rounded-full"
-                    width={avatarSize}
-                    height={avatarSize}
-                    src={user.avatar}
-                    alt="Avatar"
+                    width={size}
+                    height={size}
+                    src={imageUrl}
+                    alt={"Avatar"}
                 />
             </div>
 
@@ -74,12 +47,20 @@ export const ProfileHeader: FC<profileHeaderProps> = ({ className }) => {
                     Профиль
                 </span>
                 <h1 className="font-bold text-white mg:text-9xl lg:text-7xl text-6xl">
-                    {user.name}
+                    {name}
                 </h1>
-                <div className={cn("flex gap-1 flex-wrap items-center")}>
+                <div
+                    className={cn(
+                        width <= 300 ? "flex-col" : "items-center",
+                        "flex gap-1 flex-wrap "
+                    )}
+                    ref={ref}
+                >
                     <span className="text-gray-200 w-auto lg:text-sm md:text-base">
                         {openPlaylistCount} открытых плейлистов
                     </span>
+                    {width >= 300 && <span>•</span>}
+                    <span>{subsribeCount} подписок</span>
                 </div>
             </div>
         </div>
