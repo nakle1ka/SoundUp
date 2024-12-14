@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ContentCardRow } from "@/components/author/content-card-row";
+import { ContentCardRow } from "@/components/content/content-card-row";
 import { cn } from "@/lib/utils";
 
 interface Props {

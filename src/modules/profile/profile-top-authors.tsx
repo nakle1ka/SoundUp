@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { FC } from "react";
-import { ContentCardRow } from "@/components/author/content-card-row";
+import { ContentCardRow } from "@/components/content/content-card-row";
 
 interface Props {
     className?: string;

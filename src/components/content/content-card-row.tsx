@@ -38,8 +38,8 @@ interface Props {
 export type ContentCartType = {
     imageUrl: string;
     name: string;
-    description: string;
     link: string;
+    description?: string;
 };
 
 export const ContentCardRow: FC<Props> = ({
@@ -69,9 +69,8 @@ export const ContentCardRow: FC<Props> = ({
             </div>
             <div
                 className={cn(
-                    // getCountAuthorCards(width) <= content.length &&
-                    //     "justify-between",
-                    "flex gap-4 overflow-hidden 2xl:gap-6"
+                    "flex overflow-hidden",
+                    width > contentCardBreakPoint ? "gap-6" : "gap-4"
                 )}
             >
                 {content
