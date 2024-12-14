@@ -1,29 +1,26 @@
 "use client";
 
-import { FC, useRef } from "react";
+import { FC } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { useElementSize } from "@reactuses/core";
+import { useRequest } from "@/hooks/useRequest";
+import { getUser } from "@/services/user-service";
+import { getUserPlaylists } from "@/services/playlist-service";
 
 interface Props {
-    imageUrl: string;
-    name: string;
-    subsribeCount: number;
-    openPlaylistCount: number;
-    size?: number;
     className?: string;
 }
 
-export const ProfileHeader: FC<Props> = ({
-    imageUrl,
-    name,
-    subsribeCount,
-    openPlaylistCount,
-    size = 350,
-    className,
-}) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const [width] = useElementSize(ref);
+const defaultSize = 350;
+
+export const ProfileHeader: FC<Props> = ({ className }) => {
+    const userReq = useRequest<User>("user", getUser);
+    const playlistsReq = useRequest<Playlist[]>("playlists", getUserPlaylists);
+
+    const openPlaylistCount = playlistsReq.data?.length;
+    const user = userReq.data;
+
+    if (userReq.error) return <div>Error: {userReq.error}</div>;
 
     return (
         <div
@@ -35,9 +32,9 @@ export const ProfileHeader: FC<Props> = ({
             <div>
                 <Image
                     className="rounded-full"
-                    width={size}
-                    height={size}
-                    src={imageUrl}
+                    width={defaultSize}
+                    height={defaultSize}
+                    src={"/assets/logo.jpg"}
                     alt={"Avatar"}
                 />
             </div>
@@ -47,20 +44,12 @@ export const ProfileHeader: FC<Props> = ({
                     Профиль
                 </span>
                 <h1 className="font-bold text-white mg:text-9xl lg:text-7xl text-6xl">
-                    {name}
+                    {user ? user.name : "User"}
                 </h1>
-                <div
-                    className={cn(
-                        width <= 300 ? "flex-col" : "items-center",
-                        "flex gap-1 flex-wrap "
-                    )}
-                    ref={ref}
-                >
+                <div className={cn("flex gap-1 flex-wrap items-center")}>
                     <span className="text-gray-200 w-auto lg:text-sm md:text-base">
-                        {openPlaylistCount} открытых плейлистов
+                        {openPlaylistCount ?? 0} открытых плейлистов
                     </span>
-                    {width >= 300 && <span>•</span>}
-                    <span>{subsribeCount} подписок</span>
                 </div>
             </div>
         </div>

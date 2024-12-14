@@ -2,26 +2,31 @@ import { useState, useEffect } from "react";
 
 type QueryKey = string | (string | number)[];
 
-const useRequest = <T>(queryKey: QueryKey, queryFn: () => Promise<T>) => {
+export const useRequest = <T>(
+    queryKey: QueryKey,
+    queryFn: () => Promise<T | null>
+) => {
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        const cachedData = localStorage.getItem(JSON.stringify(queryKey));
+        if (cachedData && cachedData !== "undefined") {
+            setData(JSON.parse(cachedData));
+            setLoading(false);
+            console.log(cachedData);
+            return;
+        }
+
         const fetchData = async () => {
             setLoading(true);
             setError(null);
 
-            // Проверяем кэш
-            const cachedData = localStorage.getItem(JSON.stringify(queryKey));
-            if (cachedData) {
-                setData(JSON.parse(cachedData));
-                setLoading(false);
-            }
-
             try {
                 const result = await queryFn();
 
+                if (result === null) return;
                 // Сохраняем данные в кэш
                 localStorage.setItem(
                     JSON.stringify(queryKey),
@@ -29,8 +34,6 @@ const useRequest = <T>(queryKey: QueryKey, queryFn: () => Promise<T>) => {
                 );
                 setData(result);
             } catch (err) {
-                if (cachedData) return;
-
                 if (err instanceof Error) {
                     setError(err.message);
                 } else {
