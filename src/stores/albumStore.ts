@@ -78,4 +78,14 @@ const useAlbumStore = create<AlbumStore>((set) => ({
     setHoveredIndex: (index) => set({ hoveredIndex: index }),
 }));
 
-export { usePlayStore, useAlbumStore };
+interface ColorAlbum {
+    bgColor: string;
+    setBgColor: (color: string) => void;
+}
+
+const useColorAlbum = create<ColorAlbum>((set) => ({
+    bgColor: 'transparent',
+    setBgColor: (color: string) => set({ bgColor: color }),
+}))
+
+export { usePlayStore, useAlbumStore, useColorAlbum};

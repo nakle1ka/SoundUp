@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FastAverageColor } from "fast-average-color";
-
+import { useColorAlbum } from "@/stores/albumStore";
 
 interface LayoutPlaylistsHeadr {
     children: React.ReactNode;
@@ -11,14 +11,14 @@ interface LayoutPlaylistsHeadr {
 }
 
 const PlaylistsHeadr: React.FC<LayoutPlaylistsHeadr> = ({ children, imageSrc }) => {
-    const [bgColor, setBgColor] = useState<string>("transparent");
+    const { bgColor, setBgColor } = useColorAlbum();
 
     useEffect(() => {
         const fac = new FastAverageColor();
-        const img = document.createElement("img");
+        const img = document.createElement('img');
 
         img.src = imageSrc;
-        img.crossOrigin = "anonymous"; 
+        img.crossOrigin = 'anonymous';
 
         img.onload = () => {
             const color = fac.getColor(img);
@@ -28,10 +28,10 @@ const PlaylistsHeadr: React.FC<LayoutPlaylistsHeadr> = ({ children, imageSrc }) 
         return () => {
             fac.destroy();
         };
-    }, [imageSrc]);
+    }, [imageSrc, setBgColor]);
 
     return (
-        <div className="w-full h-[270px] p-5" style={{ backgroundColor: bgColor }}>
+        <div className="w-full h-[270px] p-5 shadow-xl" style={{ backgroundColor: bgColor }}>
             <div className="inline-block">
                 <Link href='/'>
                     <Image

@@ -3,20 +3,23 @@ import React, {ForwardedRef, useState } from "react";
 import { Play, Pause } from "lucide-react";
 import { usePlayStore } from "@/stores/albumStore";
 
+
 interface ButtonProps {
     className?: string;
     variant?: 'default' | 'primary';
-    audioIds: string[]; 
-    setCurrentIndex: (index: number) => void; 
-    onPlay?: (index: number) => void; 
+    audioIds: string[];
+    setCurrentIndex: (index: number) => void;
+    onPlay?: (index: number) => void;
+    mode?: 'fromStart' | 'fromCurrent';  
 }
 
 const ButtonPlay = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant = 'default', audioIds, setCurrentIndex, onPlay, ...props }, ref: ForwardedRef<HTMLButtonElement>) => {
+    ({ className, variant = 'default', audioIds, setCurrentIndex, onPlay, mode = 'fromStart', ...props }, ref: ForwardedRef<HTMLButtonElement>) => {
         const isPlaying = usePlayStore(state => state.isPaus);
         const togglePause = usePlayStore(state => state.paus);
         const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
-
+        const currentIndex = usePlayStore(state => state.currentIndex)
+        
         const playAudio = (index: number) => {
             if (currentAudio) {
                 currentAudio.pause(); 
@@ -37,10 +40,11 @@ const ButtonPlay = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 currentAudio?.pause();
                 togglePause();
             } else {
+                const startIndex = mode === 'fromStart' ? 0 : currentIndex; 
                 if (onPlay) {
-                    onPlay(0); 
+                    onPlay(startIndex);
                 }
-                playAudio(0); 
+                playAudio(startIndex); 
             }
         };
 
