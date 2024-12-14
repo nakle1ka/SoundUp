@@ -21,7 +21,6 @@ const HeaderForm: FC<ChildProps> = ({ isAccount }) => {
             />
             <h2 className={styles.titleText}>
                 {headerText} to
-                <br/>
                 start listening
             </h2>
         </div>

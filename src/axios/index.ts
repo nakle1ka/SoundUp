@@ -2,7 +2,7 @@ import axios from "axios";
 import { getAccessToken, getUserId, getRefreshToken } from "../utils/tokens";
 
 const apiClient = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_SERVER_API,
+    baseURL: process.env.serverApi,
 });
 
 apiClient.interceptors.request.use(

@@ -3,8 +3,8 @@
 import { FC, useState } from "react";
 
 import HeaderForm from "./HeaderForm";
-import Register from "./components/form/Register";
-import Login from "./components/form/Login";
+import Register from "./form/Register";
+import Login from "./form/Login";
 
 import { Button } from "@/components/ui/button";
 
