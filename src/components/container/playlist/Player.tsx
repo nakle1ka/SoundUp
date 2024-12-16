@@ -4,14 +4,13 @@ import ButtonPlay from "@/components/ui/playlist/ButtonPlay"
 import List from "@/components/ui/playlist/List"
 import {useAlbumStore} from "@/stores/albumStore";
 import {usePlayStore} from "@/stores/albumStore";
-import { useColorAlbum } from "@/stores/albumStore";
 import AddMediaButton from "@/components/ui/playlist/AddMediaButton";
 import MediaMenu from "@/components/ui/playlist/MediMenu";
 
 const Player = () => {
     const playlist = useAlbumStore(state => state.PlayList)
     const { paus, setCurrentIndex,  setAudioIds } = usePlayStore();
-    const {bgColor} = useColorAlbum()
+
 
     useEffect(() => {
         const ids = playlist.map(song => song.musicAudioId);

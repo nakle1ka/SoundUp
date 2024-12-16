@@ -11,26 +11,12 @@ import {
 import { Clock3 } from 'lucide-react';
 import PlaylistsHeadr from "@/components/container/playlist/PlaylistHeadr";
 import Player from "@/components/container/playlist/Player";
+import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
 
 
-const songs = [
-    {
-        id: '1' ,
-        avatar: 'https://avatars.mds.yandex.net/i?id=ea6699b8e531b3a9c151ab4756a52ece720fd700-5235116-images-thumbs&n=13',
-        name: 'aaaaa',
-        authors: 'bbbb',
-        musicAudioId: '3:33',
-    },
-    {
-        id: '2' ,
-        avatar: 'https://avatars.mds.yandex.net/i?id=ea6699b8e531b3a9c151ab4756a52ece720fd700-5235116-images-thumbs&n=13',
-        name: 'aaaaa',
-        authors: 'bbbb',
-        musicAudioId: '3:33',
-    },
-]
 
 const PlaylistsPage = () => {
+    const { hoveredIndex, setHoveredIndex, PlayList } = useAlbumStore();
 
     return(
         <div className="">
@@ -46,7 +32,7 @@ const PlaylistsPage = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {songs.map((song, index) => (
+                        {PlayList.map((song, index) => (
                             <TableRow key={song.id}>
                                 <TableCell className="font-medium">{index + 1}</TableCell>
                                 <TableCell><div>{song.name}</div><div>{song.authors}</div></TableCell>

@@ -18,48 +18,15 @@ import ButtonPlay from "@/components/ui/playlist/ButtonPlay";
 import {usePlayStore, useAlbumStore} from "@/stores/albumStore";
 import { useColorAlbum } from "@/stores/albumStore";
 
-    const songs = [
-        {
-            id: "1",
-            avatar: "/assets/test.jpg",
-            name: "Возвращение колдуна",
-            authors: ["Король и Шут"],
-            musicAudioId: "/sound/test.mp3",
-            album:"asd",
-            category: 'Pop' as MusicCategories,
-            createdAt: new Date("2021-01-05"), 
-        },
-        {
-            id: "2",
-            avatar: "/assets/test2.webp",
-            name: "Спокойная ночь",
-            authors: ["Кино", "В. Цой"],
-            musicAudioId: "/sound/test2.mp3",
-            album:"asd",
-            category: 'Pop' as MusicCategories,
-
-            createdAt: new Date("2021-01-05"), 
-        },
-        {
-            id: "1",
-            avatar: "/assets/test3.PNG",
-            name: "DARE",
-            authors: ["Gorillaz"],
-            musicAudioId: "/sound/test3.mp3",
-            album:"asas",
-            category: 'Pop' as MusicCategories,
-            createdAt: new Date("2021-01-05"), 
-        },
-    ]
 
     
     const AlbumPage = () => {
         const { isPaus, paus, setCurrentIndex,  setAudioIds } = usePlayStore();
-        const { hoveredIndex, setHoveredIndex } = useAlbumStore();
+        const { hoveredIndex, setHoveredIndex, PlayList } = useAlbumStore();
         const { bgColor } = useColorAlbum()
 
         useEffect(() => {
-            const ids = songs.map(song => song.musicAudioId);
+            const ids = PlayList.map(song => song.musicAudioId);
             setAudioIds(ids);
         }, []);
     
@@ -100,7 +67,7 @@ import { useColorAlbum } from "@/stores/albumStore";
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {songs.map((song, index) => (
+                                {PlayList.map((song, index) => (
                                     <TableRow 
                                         key={song.id} 
                                         className="rounded-md" 
@@ -112,7 +79,7 @@ import { useColorAlbum } from "@/stores/albumStore";
                                                 <ButtonPlay 
                                                     className="p-2 rounded text-sm" 
                                                     variant="primary" 
-                                                    audioIds={songs.map(s => s.musicAudioId)}
+                                                    audioIds={PlayList.map(s => s.musicAudioId)}
                                                     setCurrentIndex={setCurrentIndex} 
                                                     onPlay={handlePlay} 
                                                     mode="fromCurrent"
