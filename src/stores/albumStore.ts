@@ -23,12 +23,17 @@ const usePlayStore = create<ButtonStore>((set) => ({
 
 }));
 
+
+
 interface AlbumStore {
     hoveredIndex: number | null;
     setHoveredIndex: (index: number | null) => void;
 
     PlayList: Music[];
     setPlayList: (newPlaylist: Music[]) => void;
+
+    isOpen: boolean;
+    setIsOpen: () => void;
 }
 
 const useAlbumStore = create<AlbumStore>((set) => ({
@@ -76,7 +81,12 @@ const useAlbumStore = create<AlbumStore>((set) => ({
 
     hoveredIndex: null,
     setHoveredIndex: (index) => set({ hoveredIndex: index }),
+
+    isOpen: false,
+    setIsOpen: () =>  set((state) => ({isOpen: !state.isOpen}))
 }));
+
+
 
 interface ColorAlbum {
     bgColor: string;

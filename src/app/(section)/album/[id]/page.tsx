@@ -27,7 +27,7 @@ import { useColorAlbum } from "@/stores/albumStore";
             musicAudioId: "/sound/test.mp3",
             album:"asd",
             category: 'Pop' as MusicCategories,
-            createdAt: new Date("2021-01-05"), // DateTime
+            createdAt: new Date("2021-01-05"), 
         },
         {
             id: "2",
@@ -38,7 +38,7 @@ import { useColorAlbum } from "@/stores/albumStore";
             album:"asd",
             category: 'Pop' as MusicCategories,
 
-            createdAt: new Date("2021-01-05"), // DateTime
+            createdAt: new Date("2021-01-05"), 
         },
         {
             id: "1",
@@ -48,7 +48,7 @@ import { useColorAlbum } from "@/stores/albumStore";
             musicAudioId: "/sound/test3.mp3",
             album:"asas",
             category: 'Pop' as MusicCategories,
-            createdAt: new Date("2021-01-05"), // DateTime
+            createdAt: new Date("2021-01-05"), 
         },
     ]
 

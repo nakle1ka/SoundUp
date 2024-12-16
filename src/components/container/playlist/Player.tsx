@@ -5,6 +5,8 @@ import List from "@/components/ui/playlist/List"
 import {useAlbumStore} from "@/stores/albumStore";
 import {usePlayStore} from "@/stores/albumStore";
 import { useColorAlbum } from "@/stores/albumStore";
+import AddMediaButton from "@/components/ui/playlist/AddMediaButton";
+import MediaMenu from "@/components/ui/playlist/MediMenu";
 
 const Player = () => {
     const playlist = useAlbumStore(state => state.PlayList)
@@ -23,10 +25,8 @@ const Player = () => {
 
 
     return (
-        <div 
-            className="h-[120px] p-5 flex justify-between items-center" 
-        >
-            <div className = "w-[50px]">
+        <div className="h-[120px] p-5 flex justify-between items-center">
+            <div className="flex items-center"> 
                 <ButtonPlay 
                     className="w-[60px] h-[60px]" 
                     variant="default" 
@@ -34,8 +34,10 @@ const Player = () => {
                     setCurrentIndex={setCurrentIndex} 
                     onPlay={handlePlay} 
                 />
+                <AddMediaButton className="ml-[20px]" />
+                <MediaMenu className="ml-[20px]" />
             </div>
-            <div className = "w-[100px]"><List/></div>
+            <div className="w-[100px]"><List /></div>
         </div>
     )
 }

@@ -17,7 +17,7 @@ const List = () => {
                 <Logs className="inline-block ml-[5px]"/>
             </button>
         {isOpen && (
-            <div className="bg-[#1f1f1f] absolute rounded w-[100px]">
+            <div className="bg-[#1f1f1f] absolute rounded w-[100px] shadow-xl z-[222]">
                 <p>формат библиотеки</p>
                 <div><AlignJustify className="inline-block"/><p className="inline-block">сompact</p></div>
                 <div><Logs className="inline-block"/><p className="inline-block">list</p></div>
