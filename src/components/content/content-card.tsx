@@ -7,7 +7,7 @@ import { contentCardSize } from "./constants";
 interface Props {
     imageUrl: string;
     name: string;
-    description: string;
+    description?: string;
     link: string;
     typeCard?: "rounded" | "square";
     size?: number;

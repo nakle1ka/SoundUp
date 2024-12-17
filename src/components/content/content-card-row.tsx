@@ -69,7 +69,7 @@ export const ContentCardRow: FC<Props> = ({
             </div>
             <div
                 className={cn(
-                    "flex overflow-hidden",
+                    "flex",
                     width > contentCardBreakPoint ? "gap-6" : "gap-4"
                 )}
             >
