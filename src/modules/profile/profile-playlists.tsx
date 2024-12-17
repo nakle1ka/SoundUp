@@ -33,12 +33,12 @@ interface Props {
 // };
 
 export const ProfilePlaylists: FC<Props> = ({ className }) => {
-    const { data, loading, error } = useRequest<Playlist[]>(
+    const { data, isLoading, error } = useRequest<Playlist[]>(
         "playlists",
         getUserPlaylists
     );
 
-    if (loading) return <div>Loading...</div>;
+    if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
     if (!data) return null;
 

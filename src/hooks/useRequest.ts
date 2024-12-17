@@ -7,7 +7,7 @@ export const useRequest = <T>(
     queryFn: () => Promise<T | null>
 ) => {
     const [data, setData] = useState<T | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [isLoading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -47,5 +47,5 @@ export const useRequest = <T>(
         fetchData();
     }, [queryKey, queryFn]);
 
-    return { data, loading, error };
+    return { data, isLoading, error };
 };
