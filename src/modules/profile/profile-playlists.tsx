@@ -38,15 +38,15 @@ export const ProfilePlaylists: FC<Props> = ({ className }) => {
         getUserPlaylists
     );
 
-    if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
-    if (!data) return null;
+    if (!isLoading && !data) return null;
 
     return (
         <div className={cn(className, "px-4 mt-12")}>
             <ContentCardRow
+                isLoading={isLoading}
                 name="Открытые плейлисты"
-                content={data.map((playlist) => ({
+                content={data?.map((playlist) => ({
                     imageUrl: playlist.avatar,
                     name: playlist.name,
                     link: `/playlist/${playlist.id}`,

@@ -10,6 +10,7 @@ import {
     contentCardSize,
     countContentCardsInRow,
 } from "./constants";
+import { Skeleton } from "../ui/skeleton";
 
 const getCartWidth = (width: number) =>
     contentCardSize +
@@ -29,7 +30,8 @@ const getCountAuthorCards = (width: number) => {
 
 interface Props {
     name: string;
-    content: ContentCartType[];
+    content?: ContentCartType[];
+    isLoading?: boolean;
     description?: string;
     typeCard?: "rounded" | "square";
     className?: string;
@@ -45,6 +47,7 @@ export type ContentCartType = {
 export const ContentCardRow: FC<Props> = ({
     className,
     name,
+    isLoading,
     content,
     description,
     typeCard,
@@ -74,17 +77,30 @@ export const ContentCardRow: FC<Props> = ({
                 )}
             >
                 {content
-                    .slice(0, getCountAuthorCards(width))
-                    .map(({ imageUrl, name, description, link }, index) => (
-                        <ContentCard
-                            imageUrl={imageUrl}
-                            name={name}
-                            description={description}
-                            key={index}
-                            typeCard={typeCard}
-                            link={link}
-                        ></ContentCard>
-                    ))}
+                    ? content
+                          .slice(0, getCountAuthorCards(width))
+                          .map(
+                              (
+                                  { imageUrl, name, description, link },
+                                  index
+                              ) => (
+                                  <ContentCard
+                                      imageUrl={imageUrl}
+                                      name={name}
+                                      description={description}
+                                      key={index}
+                                      typeCard={typeCard}
+                                      link={link}
+                                  ></ContentCard>
+                              )
+                          )
+                    : isLoading &&
+                      Array.from({ length: 8 }).map((_, index) => (
+                          <Skeleton
+                              key={index}
+                              className="min-w-[150px] min-h-[150px] opacity-50"
+                          />
+                      ))}
             </div>
         </div>
     );
