@@ -1,32 +1,7 @@
-"use client";
-
-import { FC, useRef } from "react";
-import { useElementSize } from "@reactuses/core";
+import { FC } from "react";
 import { cn } from "@/lib/utils";
 import { ContentCard } from "./content-card";
-import {
-    contentCardBreakPoint,
-    contentCardGaps,
-    contentCardSize,
-    countContentCardsInRow,
-} from "./constants";
 import { Skeleton } from "../ui/skeleton";
-
-const getCartWidth = (width: number) =>
-    contentCardSize +
-    (width < contentCardBreakPoint ? contentCardGaps[0] : contentCardGaps[1]);
-
-const getCountAuthorCards = (width: number) => {
-    let count = 0;
-    let currentWidth = getCartWidth(width) * countContentCardsInRow;
-
-    while (width < currentWidth) {
-        currentWidth -= getCartWidth(width);
-        count += 1;
-    }
-
-    return countContentCardsInRow - count;
-};
 
 interface Props {
     name: string;
@@ -52,11 +27,8 @@ export const ContentCardRow: FC<Props> = ({
     description,
     typeCard,
 }) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const [width] = useElementSize(ref);
-
     return (
-        <div className={cn(" text-white", className)} ref={ref}>
+        <div className={cn(" text-white @container", className)}>
             <div>
                 <div className="flex justify-between items-end mb-3">
                     <div>
@@ -66,34 +38,28 @@ export const ContentCardRow: FC<Props> = ({
                         </span>
                     </div>
                     <span className="font-bold lg:text-base text-sm">
-                        Показать {width < 450 && <br />} все
+                        Показать <br className="@[450px]:hidden" /> все
                     </span>
                 </div>
             </div>
             <div
-                className={cn(
-                    "flex",
-                    width > contentCardBreakPoint ? "gap-6" : "gap-4"
-                )}
+                className={
+                    "flex flex-wrap overflow-hidden max-h-48 @[1413px]:gap-6 gap-4"
+                }
             >
                 {content
-                    ? content
-                          .slice(0, getCountAuthorCards(width))
-                          .map(
-                              (
-                                  { imageUrl, name, description, link },
-                                  index
-                              ) => (
-                                  <ContentCard
-                                      imageUrl={imageUrl}
-                                      name={name}
-                                      description={description}
-                                      key={index}
-                                      typeCard={typeCard}
-                                      link={link}
-                                  ></ContentCard>
-                              )
+                    ? content.map(
+                          ({ imageUrl, name, description, link }, index) => (
+                              <ContentCard
+                                  imageUrl={imageUrl}
+                                  name={name}
+                                  description={description}
+                                  key={index}
+                                  typeCard={typeCard}
+                                  link={link}
+                              ></ContentCard>
                           )
+                      )
                     : isLoading &&
                       Array.from({ length: 8 }).map((_, index) => (
                           <Skeleton

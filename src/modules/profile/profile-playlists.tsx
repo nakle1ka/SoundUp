@@ -10,27 +10,75 @@ interface Props {
     className?: string;
 }
 
-// const content: ContentCartType[] = [
+// const content = [
 //     {
 //         imageUrl: "/assets/logo.jpg",
-//         name: "Мой плелист №2",
-//         description: "CatMario",
+//         name: "Lil Uzi Vert",
+//         description: "Профиль",
 //         link: "#",
 //     },
 //     {
 //         imageUrl: "/assets/logo.jpg",
-//         name: "Мой плелист №1",
-//         description: "CatMario",
+//         name: "Travis Scott",
+//         description: "Профиль",
+//         link: "#",
+//     },
+//     {
+//         imageUrl: "/assets/logo.jpg",
+//         name: "Kendrick Lamar",
+//         description: "Профиль",
+//         link: "#",
+//     },
+//     {
+//         imageUrl: "/assets/logo.jpg",
+//         name: "J. Cole",
+//         description: "Профиль",
+//         link: "#",
+//     },
+//     {
+//         imageUrl: "/assets/logo.jpg",
+//         name: "Drake",
+//         description: "Профиль",
+//         link: "#",
+//     },
+//     {
+//         imageUrl: "/assets/logo.jpg",
+//         name: "The Weeknd",
+//         description: "Профиль",
+//         link: "#",
+//     },
+//     {
+//         imageUrl: "/assets/logo.jpg",
+//         name: "A$AP Rocky",
+//         description: "Профиль",
+//         link: "#",
+//     },
+//     {
+//         imageUrl: "/assets/logo.jpg",
+//         name: "Tyler, The Creator",
+//         description: "Профиль",
+//         link: "#",
+//     },
+//     {
+//         imageUrl: "/assets/logo.jpg",
+//         name: "Post Malone",
+//         description: "Профиль",
+//         link: "#",
+//     },
+//     {
+//         imageUrl: "/assets/logo.jpg",
+//         name: "Billie Eilish",
+//         description: "Профиль",
 //         link: "#",
 //     },
 // ];
 
-// export type ContentCartType = {
-//     imageUrl: string;
-//     name: string;
-//     description: string;
-//     link: string;
-// };
+export type ContentCartType = {
+    imageUrl: string;
+    name: string;
+    description: string;
+    link: string;
+};
 
 export const ProfilePlaylists: FC<Props> = ({ className }) => {
     const { data, isLoading, error } = useRequest<Playlist[]>(
@@ -55,3 +103,9 @@ export const ProfilePlaylists: FC<Props> = ({ className }) => {
         </div>
     );
 };
+
+// data?.map((playlist) => ({
+//     imageUrl: playlist.avatar,
+//     name: playlist.name,
+//     link: `/playlist/${playlist.id}`,
+// }))
