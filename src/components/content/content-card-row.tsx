@@ -44,7 +44,7 @@ export const ContentCardRow: FC<Props> = ({
             </div>
             <div
                 className={
-                    "flex flex-wrap overflow-hidden max-h-48 @[1413px]:gap-6 gap-4"
+                    "flex @7xl:overflow-hidden @6xl:flex-wrap overflow-clip max-h-48 @[1413px]:gap-6 gap-4"
                 }
             >
                 {content

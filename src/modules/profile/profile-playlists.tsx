@@ -10,68 +10,68 @@ interface Props {
     className?: string;
 }
 
-// const content = [
-//     {
-//         imageUrl: "/assets/logo.jpg",
-//         name: "Lil Uzi Vert",
-//         description: "Профиль",
-//         link: "#",
-//     },
-//     {
-//         imageUrl: "/assets/logo.jpg",
-//         name: "Travis Scott",
-//         description: "Профиль",
-//         link: "#",
-//     },
-//     {
-//         imageUrl: "/assets/logo.jpg",
-//         name: "Kendrick Lamar",
-//         description: "Профиль",
-//         link: "#",
-//     },
-//     {
-//         imageUrl: "/assets/logo.jpg",
-//         name: "J. Cole",
-//         description: "Профиль",
-//         link: "#",
-//     },
-//     {
-//         imageUrl: "/assets/logo.jpg",
-//         name: "Drake",
-//         description: "Профиль",
-//         link: "#",
-//     },
-//     {
-//         imageUrl: "/assets/logo.jpg",
-//         name: "The Weeknd",
-//         description: "Профиль",
-//         link: "#",
-//     },
-//     {
-//         imageUrl: "/assets/logo.jpg",
-//         name: "A$AP Rocky",
-//         description: "Профиль",
-//         link: "#",
-//     },
-//     {
-//         imageUrl: "/assets/logo.jpg",
-//         name: "Tyler, The Creator",
-//         description: "Профиль",
-//         link: "#",
-//     },
-//     {
-//         imageUrl: "/assets/logo.jpg",
-//         name: "Post Malone",
-//         description: "Профиль",
-//         link: "#",
-//     },
-//     {
-//         imageUrl: "/assets/logo.jpg",
-//         name: "Billie Eilish",
-//         description: "Профиль",
-//         link: "#",
-//     },
-// ];
+const content = [
+    {
+        imageUrl: "/assets/logo.jpg",
+        name: "Lil Uzi Vert",
+        description: "Профиль",
+        link: "#",
+    },
+    {
+        imageUrl: "/assets/logo.jpg",
+        name: "Travis Scott",
+        description: "Профиль",
+        link: "#",
+    },
+    {
+        imageUrl: "/assets/logo.jpg",
+        name: "Kendrick Lamar",
+        description: "Профиль",
+        link: "#",
+    },
+    {
+        imageUrl: "/assets/logo.jpg",
+        name: "J. Cole",
+        description: "Профиль",
+        link: "#",
+    },
+    {
+        imageUrl: "/assets/logo.jpg",
+        name: "Drake",
+        description: "Профиль",
+        link: "#",
+    },
+    {
+        imageUrl: "/assets/logo.jpg",
+        name: "The Weeknd",
+        description: "Профиль",
+        link: "#",
+    },
+    {
+        imageUrl: "/assets/logo.jpg",
+        name: "A$AP Rocky",
+        description: "Профиль",
+        link: "#",
+    },
+    {
+        imageUrl: "/assets/logo.jpg",
+        name: "Tyler, The Creator",
+        description: "Профиль",
+        link: "#",
+    },
+    {
+        imageUrl: "/assets/logo.jpg",
+        name: "Post Malone",
+        description: "Профиль",
+        link: "#",
+    },
+    {
+        imageUrl: "/assets/logo.jpg",
+        name: "Billie Eilish",
+        description: "Профиль",
+        link: "#",
+    },
+];
 
 export type ContentCartType = {
     imageUrl: string;
@@ -87,18 +87,14 @@ export const ProfilePlaylists: FC<Props> = ({ className }) => {
     );
 
     if (error) return <div>Error: {error}</div>;
-    if (!isLoading && !data) return null;
+    // if (!isLoading && !data) return null;
 
     return (
         <div className={cn(className, "px-4 mt-12")}>
             <ContentCardRow
                 isLoading={isLoading}
                 name="Открытые плейлисты"
-                content={data?.map((playlist) => ({
-                    imageUrl: playlist.avatar,
-                    name: playlist.name,
-                    link: `/playlist/${playlist.id}`,
-                }))}
+                content={content}
             />
         </div>
     );
