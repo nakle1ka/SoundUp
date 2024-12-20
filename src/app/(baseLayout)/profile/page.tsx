@@ -6,10 +6,11 @@ import { ProfileTopBg } from "@/components/profile/profile-top-bg";
 export default function Profile() {
     return (
         <div className="relative z-10 flex flex-col min-h-full">
-            <ProfileTopBg />
-            <ProfileHeader className="relative z-30" />
-            <ProfilePlaylists className="relative z-30" />
-            <ProfileFooter className="relative z-30" />
+            <ProfileTopBg>
+                <ProfileHeader className="relative z-30" />
+                <ProfilePlaylists className="relative z-30" />
+                <ProfileFooter className="relative z-30" />
+            </ProfileTopBg>
         </div>
     );
 }

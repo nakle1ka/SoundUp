@@ -42,11 +42,7 @@ export const ContentCardRow: FC<Props> = ({
                     </span>
                 </div>
             </div>
-            <div
-                className={
-                    "flex @7xl:overflow-hidden @6xl:flex-wrap overflow-clip max-h-48 @[1413px]:gap-6 gap-4"
-                }
-            >
+            <div className="flex @7xl:overflow-hidden @6xl:flex-wrap overflow-clip max-h-48 @[1413px]:gap-6 gap-4">
                 {content
                     ? content.map(
                           ({ imageUrl, name, description, link }, index) => (
