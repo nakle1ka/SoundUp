@@ -25,7 +25,7 @@ export const ContentCard: FC<Props> = ({
     return (
         <div
             className={cn(
-                "inline-flex flex-col gap-1 justify-between hover:bg-gray-50/5 rounded-xl relative z-30 min-w-[150px]",
+                "inline-flex flex-col gap-1 justify-between hover:bg-gray-50/5 rounded-xl relative z-30 min-w-[150px] max-w-[347px]",
                 className
             )}
         >
