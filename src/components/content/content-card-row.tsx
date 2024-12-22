@@ -5,6 +5,7 @@ import { Skeleton } from "../ui/skeleton";
 
 interface Props {
     name: string;
+    isMatrix?: boolean;
     content?: ContentCartType[];
     isLoading?: boolean;
     description?: string;
@@ -21,6 +22,7 @@ export type ContentCartType = {
 
 export const ContentCardRow: FC<Props> = ({
     className,
+    isMatrix,
     name,
     isLoading,
     content,
@@ -42,7 +44,12 @@ export const ContentCardRow: FC<Props> = ({
                     </span>
                 </div>
             </div>
-            <div className="flex @7xl:overflow-hidden @6xl:flex-wrap overflow-clip max-h-48 @[1413px]:gap-6 gap-4">
+            <div
+                className={cn(
+                    "flex @7xl:overflow-hidden @6xl:flex-wrap overflow-clip @[1413px]:gap-6 gap-4",
+                    isMatrix ? "flex-wrap" : "max-h-48"
+                )}
+            >
                 {content
                     ? content.map(
                           ({ imageUrl, name, description, link }, index) => (
