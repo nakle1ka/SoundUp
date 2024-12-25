@@ -16,9 +16,15 @@
     .img {
         display: block;
         width: auto !important;
-        height: 80% !important;
+        max-height: 80% !important;
         aspect-ratio: 1 / 1;
         margin: auto;
         border-radius: 5px;
+    }
+}
+
+@media (max-width: 600px) {
+    #container {
+        grid-template-columns: 35px 1fr auto auto;
     }
 }

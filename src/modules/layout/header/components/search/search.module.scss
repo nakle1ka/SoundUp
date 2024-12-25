@@ -2,7 +2,7 @@
 @import '@/SCSS/mixins.scss';
 
 .container {
-    width: 400px;
+    width: clamp(200px, 50%, 500px);
     height: 100%;
     border-radius: 200px;
     overflow: hidden;

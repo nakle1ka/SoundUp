@@ -22,6 +22,13 @@
     }
 }
 
+.username {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 @mixin profileDropDownItem() {
     display: flex;
     gap: 2px;

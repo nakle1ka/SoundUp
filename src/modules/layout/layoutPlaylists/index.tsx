@@ -3,6 +3,9 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import apiClient from '@/axios';
 
+
+import { useVisibleElements } from './hooks/useVisibleElements';
+
 import Link from 'next/link';
 import { Skeleton } from '@/components/ui/skeleton';
 import { PlaylistCard } from './components/playlistCard/playlistCard';
@@ -11,13 +14,8 @@ import { Ellipsis } from 'lucide-react';
 import { getUserId } from '@/utils/tokens';
 
 import styles from './styles/layoutPlaylists.module.scss';
-import { useVisibleElements } from './hooks/useVisibleElements';
 
-type Props = {
-
-}
-
-export const LayoutPlaylists: FC<Props> = () => {
+export const LayoutPlaylists: FC = () => {
     const [playlists, setPlaylists] = useState<(Playlist | Album)[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -53,7 +51,6 @@ export const LayoutPlaylists: FC<Props> = () => {
         const visibleElementsCount = useVisibleElements(containerRef);
         setVisibleElements(visibleElementsCount);
     }, [visibleElements])
-    
 
     return (
         <div className={styles.container} >

@@ -20,15 +20,15 @@ function getUserId(): string | undefined {
 }
 
 function setUserId(userId: string) {
-    document.cookie = `userId=${encodeURIComponent(userId)}; path=/; samesite=strict`;
+    document.cookie = `userId=${encodeURIComponent(userId)}; path=/; Max-Age=604800; samesite=strict;`;
 }
 
 function setAccessToken(accessToken: string) {
-    document.cookie = `accessToken=${encodeURIComponent(accessToken)}; path=/; samesite=strict`;
+    document.cookie = `accessToken=${encodeURIComponent(accessToken)}; path=/; Max-Age=604800; samesite=strict; `;
 }
 
 function setRefreshToken(refreshToken: string) {
-    document.cookie = `refreshToken=${encodeURIComponent(refreshToken)}; path=/; samesite=strict`;
+    document.cookie = `refreshToken=${encodeURIComponent(refreshToken)}; path=/; Max-Age=604800; samesite=strict;`;
 }
 
 export {

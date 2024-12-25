@@ -42,6 +42,24 @@
 }
 
 .opened {
-    width: 300px;
+    width: 400px;
+}
+
+@media (max-width: 1440px) {
+    .opened {
+        width: 300px;
+    }
+}
+
+@media (max-width: 900px) {
+    .opened {
+        width: 260px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        display: none;
+    }
 }
 

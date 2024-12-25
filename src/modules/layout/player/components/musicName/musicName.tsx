@@ -4,7 +4,7 @@ import styles from './musicName.module.scss';
 
 type Props = {
     name: string;
-    authors: string[];
+    authors?: string[];
 }
 
 export const MusicName: FC<Props> = ({ name, authors }) => {
@@ -12,8 +12,8 @@ export const MusicName: FC<Props> = ({ name, authors }) => {
 
     return (
         <div className={styles.container} >
-            <span className={styles.name}>{name}</span>
-            <span className={styles.author}>{authors.join(", ")}</span>
+            <span className={styles.name}>{name || ""}</span>
+            <span className={styles.author}>{authors && authors.join(", ") || ""}</span>
 
             {!isFav && (
                 <button className={styles.plus} onClick={() => setIsFav(true)}>
@@ -25,7 +25,7 @@ export const MusicName: FC<Props> = ({ name, authors }) => {
 
             {isFav && (
                 <div className={styles.plus}>
-                    <Check 
+                    <Check
                         className={styles.checkIco}
                     />
                 </div>

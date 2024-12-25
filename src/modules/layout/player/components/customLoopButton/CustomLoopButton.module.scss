@@ -3,13 +3,21 @@
 @import '@/SCSS/mixins.scss';
 
 .btn {
-    width: auto !important;
-    height: 100% !important;
-    aspect-ratio: 1 / 1;
-    
+    color: $grayColor;
+    transition: all .3s;
+
+    &:hover {
+        color: white;
+    }
+
     svg {
         width: 100%;
         height: 100%;
-        color: $grayColor;
+    }
+}
+
+@media (max-width: 600px) {
+    .btn {
+        display: none;
     }
 }

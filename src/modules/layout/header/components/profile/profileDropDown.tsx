@@ -30,12 +30,12 @@ import { LogOut, User } from 'lucide-react';
 export const ProfileDropDown: FC = () => {
     const router = useRouter();
 
-    const [avatarData, setAvatarData] = useState<string>("");
+    const [userData, setUserData] = useState<User>({} as User);
 
     useEffect(() => {
         async function fetchData() {
-            const resData: User = (await apiClient.get(routes.GET_USER)).data
-            setAvatarData(resData.avatar)
+            const resData: User = (await apiClient.get(routes.GET_USER)).data;
+            setUserData(resData);
         }
 
         fetchData()
@@ -54,7 +54,7 @@ export const ProfileDropDown: FC = () => {
 
                 <div className={styles.avatarContainer}>
                     <Avatar className={styles.avatar}>
-                        <AvatarImage src={avatarData} className={styles.image} />
+                        <AvatarImage src={userData.avatar} className={styles.image} />
                         <AvatarFallback>?</AvatarFallback>
                     </Avatar>
                 </div>
@@ -62,7 +62,9 @@ export const ProfileDropDown: FC = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
 
-                <DropdownMenuLabel>Аккаунт</DropdownMenuLabel>
+                <DropdownMenuLabel className={styles.username}>
+                    {userData.name}
+                </DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
 

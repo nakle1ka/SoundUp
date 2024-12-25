@@ -24,6 +24,7 @@
     "react-dom": "^18",
     "react-h5-audio-player": "^3.9.3",
     "react-hook-form": "^7.53.2",
+    "react-responsive": "^10.0.0",
     "sass": "^1.81.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",

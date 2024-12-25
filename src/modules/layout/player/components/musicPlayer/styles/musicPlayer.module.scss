@@ -1,0 +1,76 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/mixins.scss';
+
+.playerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 80%;
+    height: 100%;
+
+    padding: 5px 0;
+    margin: 0 auto
+}
+
+.topSide {
+    @include FC;
+    gap: 5px;
+
+    width: 100%;
+
+    .controllButton, .mainControllButton {
+        height: 75%;
+        aspect-ratio: 1 / 1;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .mainControllButton {
+        height: 100%;
+        color: white;
+    }
+
+    .playPauseIco {
+        color: white;
+    }
+}
+
+.bottomSide {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+
+    .sliderWrapper {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .time {
+        color: $grayColor;
+        width: 50px;
+    }
+
+    .timeRight {
+        text-align: end;
+    }
+}
+
+.slider {
+    $transition: all 0.15s;
+
+    span:nth-child(1) {
+        span {
+            transition: $transition;
+            background-color: $mainGreen;
+        }
+    }
+
+    span:nth-child(2) {
+        transition: $transition;
+    }
+}

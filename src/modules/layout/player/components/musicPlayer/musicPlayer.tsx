@@ -1,67 +1,146 @@
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/src/styles.scss';
+import { FC, useEffect, useRef } from 'react';
 
-import { FC, useCallback, useEffect, useRef } from 'react';
-import { useLayoutStore } from '@/stores/layoutStore';
-
-import { CustomLoopButton } from '../customLoopButton/customLoopButton';
+import { Slider } from '@/components/ui/slider';
+import { LoopButton } from '../customLoopButton/customLoopButton';
 import { MixButton } from '../mixButton/MixButton';
+import { CirclePause, CirclePlay, SkipBack, SkipForward } from 'lucide-react';
 
-import './musicPlayer.css';
+import { formatTime } from './utils';
+import { TPlayerStore } from '@/stores/types/player';
+
+import styles from "./styles/musicPlayer.module.scss"
 
 type Props = {
-    musicData: Music;
-    playistLength: number;
-    activeIndex: number;
+    data: TPlayerStore
 }
 
-export const MusicPlayer: FC<Props> = ({ musicData, playistLength, activeIndex }) => {
-    const setActiveIndex = useLayoutStore(state => state.setActiveIndex);
-    const volume: number  = useLayoutStore(state => state.volume);
-    const isLooped: boolean = useLayoutStore(state => state.isLooped);
+export const MusicPlayer: FC<Props> = ({ data }) => {
+    const {
+        isPaused,
+        setIsPaused,
+        isLooped,
+        volume,
+        sliderValue,
+        setSliderValue,
+        currentPlayList,
+        activeIndex,
+        setActiveIndex
+    } = data;
 
-    const ref = useRef<AudioPlayer>(null);
+    const currentTrack = currentPlayList[activeIndex];
 
-    // Я сам в шоке какие костыли пришлось придумывать
-    // Но это единственная "нормальная" библиотека, которую я нашёл
-    // Если вы знаете получше, пожалуйта, подскажите :)
+    const audioRef = useRef<HTMLAudioElement>(null);
+
     useEffect(() => {
-        if(ref.current) {
-            if(ref.current.audio.current) {
-                ref.current.audio.current.volume = volume;
+        if (audioRef.current) {
+            isPaused ? audioRef.current.pause() : audioRef.current.play();
+        }
+    }, [isPaused]);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.volume = volume;
+        }
+    }, [volume]);
+
+    const handleClickNext = () => {
+        if (activeIndex < currentPlayList.length - 1) {
+            setActiveIndex(activeIndex + 1)
+            setSliderValue(0)
+        }
+        else if (activeIndex === currentPlayList.length - 1) {
+
+            if (isLooped) {
+                setActiveIndex(0)
+                setSliderValue(0)
             }
         }
-    }, [volume])
+    }
 
-    const handleClickNext = useCallback(() => {
-        if (activeIndex < playistLength - 1) {
-            setActiveIndex(1)
-        } else {
-            if(isLooped) setActiveIndex(-(playistLength - 1))
+    const handleClickPrev = () => {
+        if (activeIndex > 0) setActiveIndex(activeIndex - 1)
+    }
+
+    const timeUpdate = () => {
+        if (audioRef.current) {
+            const progress = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+            setSliderValue(progress);
         }
-    }, [activeIndex, playistLength])
+    };
 
-    const handleClickPrev = useCallback(() => {
-        if (activeIndex > 0) setActiveIndex(-1)
-    }, [activeIndex, playistLength])
+    const handleChangeTime = (value: number) => {
+        if (audioRef.current) {
+            const newTime = (value / 100) * audioRef.current.duration;
+            audioRef.current.currentTime = newTime;
+        }
+    };
 
     return (
-        <AudioPlayer
-            src={musicData.musicAudioId}
-            layout='stacked-reverse'
-            className='layout__player-container'
+        <div className={styles.playerContainer}>
 
-            ref={ref}
+            {currentTrack &&
+                <audio
+                    ref={audioRef}
+                    src={currentTrack.musicAudioId}
+                    onEnded={handleClickNext}
+                    autoPlay={isPaused ? false : true}
+                    onTimeUpdate={timeUpdate}
+                />
+            }
 
-            showSkipControls
-            showFilledVolume
+            <div className={styles.topSide} >
+                <LoopButton className={styles.controllButton} />
 
-            onClickNext={handleClickNext}
-            onClickPrevious={handleClickPrev}
-            onEnded={handleClickNext}
+                <button className={styles.mainControllButton} onClick={handleClickPrev}>
+                    <SkipBack />
+                </button>
 
-            customAdditionalControls={[<CustomLoopButton />]}
-            customVolumeControls={[<MixButton />]}
-        />
+                <button
+                    className={styles.mainControllButton}
+                    onClick={() => {
+                        setIsPaused(!isPaused);
+                    }}
+                >
+                    {
+                        isPaused
+                            ? <CirclePlay className={styles.playPauseIco} />
+                            : <CirclePause className={styles.playPauseIco} />
+                    }
+                </button>
+
+                <button className={styles.mainControllButton} onClick={handleClickNext}>
+                    <SkipForward />
+                </button>
+
+                <MixButton className={styles.controllButton} />
+            </div>
+
+
+            <div className={styles.bottomSide} >
+                <span className={styles.time}>
+                    {audioRef.current ? formatTime(audioRef.current.currentTime) : '0:00'}
+                </span>
+                <div className={styles.sliderWrapper}>
+                    <Slider
+                        value={[sliderValue]}
+                        onValueChange={(val) => {
+                            handleChangeTime(val[0])
+                        }}
+                        className={styles.slider}
+
+                        onMouseUp={() => console.log(audioRef.current?.duration)}
+                    />
+                </div>
+                <span className={styles.time + " " + styles.timeRight}>
+                    {
+                        audioRef.current && (
+                            audioRef.current.duration
+                                ? formatTime(audioRef.current.duration)
+                                : '0:00'
+                        )
+                    }
+                </span>
+            </div>
+        </div>
     );
 }
