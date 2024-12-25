@@ -1,7 +1,7 @@
 @import '@/SCSS/vars.scss';
 
 .container {
-    width: 180px;
+    width: 200px;
     overflow: hidden;
 
     color: white;
@@ -18,7 +18,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: 12px;
-        font-weight:500;
+        font-weight: 500;
     }
 
     .name {
@@ -30,6 +30,7 @@
         color: $grayColor;
     }
 
+
     .plus {
         justify-self: center;
         align-self: center;
@@ -38,7 +39,7 @@
         color: $grayColor;
 
         .plusIco {
-            width: 100%;
+            width: 18px;
             height: auto;
             aspect-ratio: 1 / 1;
 
@@ -50,11 +51,36 @@
         }
 
         .checkIco {
-            width: 100%;
             height: auto;
             aspect-ratio: 1 / 1;
             color: $mainGreen;
         }
 
+    }
+}
+
+@media (max-width: 1100px) {
+    .container {
+        width: 150px;
+    }
+}
+
+@media (max-width: 900px) {
+    .container {
+        width: 100px;
+
+        .name, .author {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: auto;
+        padding-right: 5px;
+        grid-template-columns: 1fr;
+
+        order: 2;
     }
 }

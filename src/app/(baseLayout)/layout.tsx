@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
 
-import { Container } from "@/components/container/container";
-import { Header } from "@/modules/layout/header";
-import { LayoutPlaylists } from "@/modules/layout/layoutPlaylists";
-import { MusicList } from "@/modules/layout/musicList";
-import { Player } from "@/modules/layout/player";
-
+import { Poppins } from "next/font/google";
 import { Poppins } from "next/font/google";
 import styles from "./styles/layout.module.scss";
 import "../globals.css";
+import { LayoutWrapper } from "@/modules/layout/layoutWrapper/layoutWrapper";
 
 const poppins = Poppins({
     weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -25,6 +21,13 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    return (
+        <html lang="en">
+            <body className={`${poppins.className}`}>
+                <LayoutWrapper>{children}</LayoutWrapper>
+            </body>
+        </html>
+    );
     return (
         <html lang="en">
             <body className={`${poppins.className}`}>

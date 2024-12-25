@@ -1,6 +1,6 @@
 'use client'
 
-import { useLayoutStore } from '@/stores/layoutStore';
+import { usePlayerStore } from '@/stores/playerStore';
 
 import Image from 'next/image';
 import { Container } from '@/components/container/container';
@@ -11,39 +11,33 @@ import { MusicControlls } from './components/musicControlls/musicControlls';
 import { FC } from 'react';
 import styles from "./styles/players.module.scss"
 
-type Props = {
-    
-}
 
-export const Player: FC<Props> = ({  }) => {
-    const playlist = useLayoutStore(state => state.currentPlayList);
-    const activeIndex = useLayoutStore(state => state.activeIndex);
+export const Player: FC = () => {
+    const storeData =  usePlayerStore(state => state);
 
-    const musicData = playlist[activeIndex];
+    const musicData = storeData.currentPlayList[storeData.activeIndex];
 
     return (
         <Container id={styles.container}>
-                <Image
-                    src={musicData.avatar}
-                    alt=''
-                    width={100}
-                    height={100}
+            <Image
+                src={musicData?.avatar || ""}
+                alt='avatar'
+                width={100}
+                height={100}
 
-                    className={styles.img}
-                />
+                className={styles.img}
+            />
 
-                <MusicName
-                    name={musicData.name}
-                    authors={musicData.authors}
-                />
+            <MusicName
+                name={musicData?.name || ""}
+                authors={musicData?.authors || ""}
+            />
 
-                <MusicPlayer
-                    musicData={musicData}
-                    activeIndex={activeIndex}
-                    playistLength={playlist.length}
-                />
+            <MusicPlayer
+                data={storeData}
+            />
 
-                <MusicControlls />
+            <MusicControlls />
 
         </Container>
     );

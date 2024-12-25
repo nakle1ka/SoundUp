@@ -9,10 +9,14 @@ $iconSize: 18px;
 }
 
 .container {
-    width: 200px;
+    width: 250px;
     display: flex;
+
+    justify-content: flex-end;
     align-items: center;
     gap: 5px;
+
+    padding-right: 5px;
 
     .toggleMenu {
         color: $grayColor;
@@ -24,5 +28,24 @@ $iconSize: 18px;
 
     .active {
         color: white;
+    }
+}
+
+@media (max-width: 1100px) {
+    .container {
+        width: 200px;
+    }
+}
+
+@media (max-width: 900px) {
+    .container {
+        width: 150px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        order: 3;
+        width: auto;
     }
 }

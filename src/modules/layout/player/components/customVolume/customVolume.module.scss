@@ -6,6 +6,7 @@
     @include FC;
     gap: 5px;
     flex: 1 1 auto;
+    max-width: 150px;
 
     .volumeIco {
         color: $grayColor;

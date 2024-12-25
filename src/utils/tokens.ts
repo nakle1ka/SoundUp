@@ -22,19 +22,19 @@ function getUserId(): string | undefined {
 function setUserId(userId: string) {
     document.cookie = `userId=${encodeURIComponent(
         userId
-    )}; path=/; samesite=strict`;
+    )}; path=/; Max-Age=604800; samesite=strict;`;
 }
 
 function setAccessToken(accessToken: string) {
     document.cookie = `accessToken=${encodeURIComponent(
         accessToken
-    )}; path=/; samesite=strict`;
+    )}; path=/; Max-Age=604800; samesite=strict; `;
 }
 
 function setRefreshToken(refreshToken: string) {
     document.cookie = `refreshToken=${encodeURIComponent(
         refreshToken
-    )}; path=/; samesite=strict`;
+    )}; path=/; Max-Age=604800; samesite=strict;`;
 }
 
 export {

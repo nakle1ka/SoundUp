@@ -24,3 +24,16 @@
     border-radius: 10px;
     overflow: auto;
 }
+
+@media (min-width: 1440px) {
+    .wrapper {
+        grid-template-rows: ($headerHeight + 10px) 1fr ($playerHeight + 10px);
+    }
+}
+
+@media (max-width: 600px) {
+    #container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+}

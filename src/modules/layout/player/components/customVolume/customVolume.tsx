@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import { useLayoutStore } from '@/stores/layoutStore';
+import { usePlayerStore } from '@/stores/playerStore';
 
 import { Slider } from '@/components/ui/slider';
 import { Volume2, Volume1, VolumeX } from 'lucide-react';
@@ -11,8 +11,8 @@ type Props = {
 }
 
 export const CustomVolume: FC<Props> = ({ }) => {
-    const volume = useLayoutStore(state => state.volume)
-    const setVolume = useLayoutStore(state => state.setVolume)
+    const volume = usePlayerStore(state => state.volume)
+    const setVolume = usePlayerStore(state => state.setVolume)
 
     const [isMuted, setIsMuted] = useState<boolean>(false);
     const [temp, setTemp] = useState<number>(volume);
