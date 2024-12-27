@@ -50,26 +50,25 @@ export const ContentCardRow: FC<Props> = ({
                     isMatrix ? "flex-wrap" : "max-h-48"
                 )}
             >
-                {content
-                    ? content.map(
-                          ({ imageUrl, name, description, link }, index) => (
-                              <ContentCard
-                                  imageUrl={imageUrl}
-                                  name={name}
-                                  description={description}
-                                  key={index}
-                                  typeCard={typeCard}
-                                  link={link}
-                              ></ContentCard>
-                          )
-                      )
-                    : isLoading &&
-                      Array.from({ length: 8 }).map((_, index) => (
-                          <Skeleton
-                              key={index}
-                              className="min-w-[150px] min-h-[150px] opacity-50"
-                          />
-                      ))}
+                {content?.map(
+                    ({ imageUrl, name, description, link }, index) => (
+                        <ContentCard
+                            imageUrl={imageUrl}
+                            name={name}
+                            description={description}
+                            key={index}
+                            typeCard={typeCard}
+                            link={link}
+                        ></ContentCard>
+                    )
+                ) ??
+                    (isLoading &&
+                        Array.from({ length: 8 }).map((_, index) => (
+                            <Skeleton
+                                key={index}
+                                className="min-w-[150px] min-h-[150px] opacity-50"
+                            />
+                        )))}
             </div>
         </div>
     );

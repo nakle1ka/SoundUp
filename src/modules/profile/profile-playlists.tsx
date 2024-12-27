@@ -73,13 +73,6 @@ const content = [
     },
 ];
 
-export type ContentCartType = {
-    imageUrl: string;
-    name: string;
-    description: string;
-    link: string;
-};
-
 export const ProfilePlaylists: FC<Props> = ({ className }) => {
     const { data, isLoading, error } = useRequest<Playlist[]>(
         "playlists",
@@ -94,7 +87,15 @@ export const ProfilePlaylists: FC<Props> = ({ className }) => {
             <ContentCardRow
                 isLoading={isLoading}
                 name="Открытые плейлисты"
-                content={content}
+                content={
+                    data?.map((playlist) => {
+                        return {
+                            imageUrl: playlist.avatar,
+                            name: playlist.name,
+                            link: `/playlist/${playlist.id}`,
+                        };
+                    }) ?? content
+                }
             />
         </div>
     );
