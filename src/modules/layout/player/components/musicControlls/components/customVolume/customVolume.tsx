@@ -7,13 +7,14 @@ import { Volume2, Volume1, VolumeX } from 'lucide-react';
 import styles from './customVolume.module.scss';
 
 type Props = {
-
+    iconColor?: "white" | "default"
+    className?: string;
 }
 
-export const CustomVolume: FC<Props> = ({ }) => {
-    const volume = usePlayerStore(state => state.volume)
-    const setVolume = usePlayerStore(state => state.setVolume)
-
+export const CustomVolume: FC<Props> = ({ iconColor = "default", className = "" }) => {
+    const volume = usePlayerStore(state => state.volume);
+    const setVolume = usePlayerStore(state => state.setVolume);
+    
     const [isMuted, setIsMuted] = useState<boolean>(false);
     const [temp, setTemp] = useState<number>(volume);
 
@@ -31,20 +32,25 @@ export const CustomVolume: FC<Props> = ({ }) => {
         if (num >= 0 && num <= 1) setVolume(num)
     }, [setVolume])
 
+    let currentColor: string;
+    iconColor == "white"
+        ? currentColor = [styles.white, styles.volumeIco].join(" ")
+        : currentColor = styles.volumeIco
+
     return (
-        <div className={styles.volume}>
+        <div className={styles.volume + " " + className}>
             <button onClick={() => setIsMuted(prev => !prev)}>
                 {
                     (volume > 0.5)
-                    && <Volume2 className={styles.volumeIco} />
+                    && <Volume2 className={currentColor} />
                 }
                 {
                     (volume > 0 && volume <= 0.5)
-                    && <Volume1 className={styles.volumeIco} />
+                    && <Volume1 className={currentColor} />
                 }
                 {
                     (volume == 0)
-                    && <VolumeX className={styles.volumeIco} />
+                    && <VolumeX className={currentColor} />
                 }
             </button>
 

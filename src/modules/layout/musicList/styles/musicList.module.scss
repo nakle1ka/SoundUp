@@ -2,10 +2,30 @@
 @import '@/SCSS/layoutVars.scss';
 @import '@/SCSS/mixins.scss';
 
-.container {
+$lgWidtth: 400px;
+$mdWidth: 300px;
+$smWidth: 260px;
+
+.wrapper {
+    width: $lgWidtth;
     height: 100%;
+
+    position: relative;
+    transition: all .4s;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .4s;
+
+
+    height: 100%;
+    width: $lgWidtth;
     background-color: $mainColor;
     border-radius: 10px;
+
     overflow: hidden;
 
     .content {
@@ -37,23 +57,27 @@
     }
 }
 
-.closed {
-    width: 0;
-}
-
-.opened {
+.wrapperOpened {
     width: 400px;
 }
 
+.wrapperClosed {
+    width: 0;
+}
+
+.closed {
+    left: 10px;
+}
+
 @media (max-width: 1440px) {
-    .opened {
-        width: 300px;
+    .container, .wrapperOpened {
+        width: $mdWidth;
     }
 }
 
 @media (max-width: 900px) {
-    .opened {
-        width: 260px;
+    .container, .wrapperOpened {
+        width: $smWidth;
     }
 }
 

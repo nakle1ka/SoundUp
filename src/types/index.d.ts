@@ -12,15 +12,22 @@ enum MusicCategories {
 
 interface Music {
     id: string;
+    authorId: string;
+    audioId: string;
+    albumId: string;
+
+    albumName: string;
+    authorsNames: string[];
+
     avatar: string;
     name: string;
-    authors: string[];
-    musicAudioId: string;
+    // musicAudio: string;
 
     category: MusicCategories;
+    isFavourited: boolean;
 
-    createdAt: Date; // DateTime
-    updatedAt: Date; // DateTime
+    createdAt: string; // DateTime
+    updatedAt: string; // DateTime
 }
 
 interface MusicAudio {

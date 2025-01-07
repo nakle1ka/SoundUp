@@ -1,0 +1,23 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/mixins.scss';
+
+.avt {
+    width: 100% !important;
+    aspect-ratio: 1 / 1;
+
+    border-radius: 10px;
+}
+
+.ico {
+    color: $grayColor;
+}
+
+.name {
+    font-size: 20px;
+    color: white;
+}
+
+.authors {
+    font-size: 15px;
+    color: $grayColor;
+}

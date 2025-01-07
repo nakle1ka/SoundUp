@@ -1,0 +1,167 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/mixins.scss';
+
+$buttonsSize: 35px;
+$playButtonSize: 45px;
+
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10vh 10vw;
+
+    .closeButton {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+
+        color: white;
+    }
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    gap: 20px;
+}
+
+.top {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    align-items: end;
+    gap: 10px;
+
+    color: white;
+
+    width: 100%;
+
+    .avatar {
+        border-radius: 15px;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+}
+
+.general {
+    overflow: hidden;
+
+    .name {
+        font-size: 30px;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        text-wrap: nowrap;
+    }
+
+    .authors {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.5);
+    }
+}
+
+.controlls {
+    $volumeSize: 20%;
+
+    display: grid;
+    grid-template-columns: $volumeSize 1fr $volumeSize;
+    align-items: center;
+    justify-content: center;
+
+    .main {
+        @include FC;
+        color: white;
+    }
+}
+
+.loop, .mix {
+    color: white;
+}
+
+.add {
+    justify-self: start;
+    transform: scale(1.2);
+}
+
+.volume {
+    width: 100%;
+    max-width: 180px;
+    justify-self: end;
+}
+
+.prev,
+.next,
+.play {
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.prev,
+.next {
+    width: $buttonsSize;
+    height: $buttonsSize;
+}
+
+.play {
+    width: $playButtonSize;
+    height: $playButtonSize;
+}
+
+@media (max-width: 800px) {
+    .top {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+
+        .avatar {
+            width: 55%;
+            min-width: 350px;
+            justify-self: center;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .top .avatar {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .general {
+        .name {
+            font-size: 25px;
+        }
+
+        .authors {
+            font-size: 16px;
+        }
+    }
+
+    .controlls {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+
+        .main {
+            grid-column: 1 / -1;
+            order: -1;
+        }
+
+        .add {
+            grid-row: 2 / -1;
+            grid-column: 2 / -1;
+            justify-self: end;
+        }
+    }
+}
