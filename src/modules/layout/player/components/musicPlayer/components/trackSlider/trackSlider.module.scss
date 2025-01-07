@@ -1,0 +1,43 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/mixins.scss';
+
+.sliderWrapper {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+}
+
+.slider {
+    $transition: all 0.15s;
+
+    span:nth-child(1) {
+        span {
+            transition: $transition;
+        }
+    }
+
+    span:nth-child(2) {
+        transition: $transition;
+    }
+}
+
+.green {
+    span:nth-child(1) {
+        span {
+            background-color: $mainGreen;
+        }
+    }
+}
+
+.white {
+    span:nth-child(1) {
+        height: 4px;
+        span {
+            background-color: white;
+        }
+    }
+
+    span:nth-child(2) {
+        opacity: 0;
+    }
+}

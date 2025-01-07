@@ -1,0 +1,32 @@
+@import '@/SCSS/vars.scss';
+@import '@/SCSS/mixins.scss';
+
+.plus {
+    justify-self: center;
+    align-self: center;
+    grid-row: 1 / -1;
+    color: $grayColor;
+
+    .plusIco {
+        width: 18px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+
+        transition: all .2s;
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    
+}
+.checkIco {
+    height: auto;
+    aspect-ratio: 1 / 1;
+    color: $mainGreen;
+}
+
+.white {
+    color: white;
+}

@@ -1,0 +1,6 @@
+export { handleClickNext, handleClickPrev } from "./utils/changeActiveIndex"
+export { LoopButton } from "./components/musicPlayer/components/customLoopButton/customLoopButton"
+export { MixButton } from "./components/musicPlayer/components/mixButton/MixButton"
+export { CustomVolume } from "./components/musicControlls/components/customVolume/customVolume"
+export { TrackSlider } from "./components/musicPlayer/components/trackSlider/trackSlider"
+export { Add } from "./components/add/add"

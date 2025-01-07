@@ -16,6 +16,9 @@ export type TPlayerStore = {
 
     isLooped: boolean;
     toggleIsLooped: () => void;
+
+    isFavourited: boolean;
+    setIsFavourited: (val: boolean) => void;
     
     currentPlayList: Music[];
     setCurrentPlayList: (newPlaylist: Music[]) => void;

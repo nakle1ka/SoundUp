@@ -21,19 +21,21 @@ export const MusicList: FC = () => {
     const currentMusicData = playlist[activeIndex];
 
     return (
-        <div className={`${styles.container} ${isOpened ? styles.opened : styles.closed}`} >
-            <MusicListHeader
-                title={currentMusicData?.name || ""}
-            />
-            <div className={styles.content}>
-                <MusicAvatar
-                    className={styles.img}
-                    currentMusicData={currentMusicData}
+        <div className={`${styles.wrapper} ${isOpened ? styles.wrapperOpened : styles.wrapperClosed}`}>
+            <div className={`${styles.container} ${isOpened ? styles.opened : styles.closed}`} >
+                <MusicListHeader
+                    title={currentMusicData?.name || ""}
                 />
+                <div className={styles.content}>
+                    <MusicAvatar
+                        className={styles.img}
+                        currentMusicData={currentMusicData}
+                    />
 
-                <span className={styles.name}>{currentMusicData?.name || ""}</span>
-                <span className={styles.author}>{currentMusicData?.authors.join(", ") || ""}</span>
+                    <span className={styles.name}>{currentMusicData?.name || ""}</span>
+                    <span className={styles.author}>{currentMusicData?.authorsNames.join(", ") || ""}</span>
 
+                </div>
             </div>
         </div>
     );

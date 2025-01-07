@@ -56,3 +56,9 @@
     aspect-ratio: 1/1;
     opacity: 0.05;
 }
+
+@media (max-width: $mobileBreakpoint) {
+    .container {
+        display: none;
+    }
+}

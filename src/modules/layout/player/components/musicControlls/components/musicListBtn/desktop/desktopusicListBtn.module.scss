@@ -1,0 +1,15 @@
+@import "../../../musicControlls.module.scss";
+
+.icon {
+    width: $iconSize;
+    height: $iconSize;
+
+    color: $grayColor;
+    transition: all .2s;
+
+    @include iconSize();
+}
+
+.active {
+    color: white;
+}

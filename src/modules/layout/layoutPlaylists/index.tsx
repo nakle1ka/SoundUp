@@ -3,7 +3,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import apiClient from '@/axios';
 
-
 import { useVisibleElements } from './hooks/useVisibleElements';
 
 import Link from 'next/link';
@@ -17,7 +16,7 @@ import styles from './styles/layoutPlaylists.module.scss';
 
 export const LayoutPlaylists: FC = () => {
     const [playlists, setPlaylists] = useState<(Playlist | Album)[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const [visibleElements, setVisibleElements] = useState<number>(0);
