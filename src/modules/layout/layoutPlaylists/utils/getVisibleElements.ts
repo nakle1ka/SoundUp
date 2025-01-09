@@ -1,4 +1,4 @@
-export const useVisibleElements = (ref: React.RefObject<HTMLElement>): number => {
+export const getVisibleElements = (ref: React.RefObject<HTMLElement>): number => {
     const containerRef = ref;
 
     if (containerRef && containerRef.current) {

@@ -3,7 +3,7 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import apiClient from '@/axios';
 
-import { useVisibleElements } from './hooks/useVisibleElements';
+import { getVisibleElements } from './utils/getVisibleElements';
 
 import Link from 'next/link';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -47,7 +47,7 @@ export const LayoutPlaylists: FC = () => {
     }, [])
 
     useEffect(() => {
-        const visibleElementsCount = useVisibleElements(containerRef);
+        const visibleElementsCount = getVisibleElements(containerRef);
         setVisibleElements(visibleElementsCount);
     }, [visibleElements])
 
